@@ -16,7 +16,17 @@ namespace GameOfLife
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            // create game of life
+            GameOfLife gol = new GameOfLife(5);
+
+            // test implementation
+            Console.WriteLine(gol.ToString());
+            gol.Update(3);
+            Console.WriteLine(gol.ToString());
+
+
+            Application.Run(new MainForm());
         }
     }
 }
