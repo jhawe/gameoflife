@@ -18,6 +18,15 @@ namespace GameOfLife
             this.form.model = this.gol;
             this.form.button1.Click += OnUpdateClick;
             this.form.button2.Click += OnInitNewClick;
+
+            // the special init buttons
+            this.form.btBlinker.Click += OnInitBlinker;
+            this.form.Redraw();
+        }
+
+        private void OnInitBlinker(object sender, EventArgs e)
+        {
+            this.gol.BlinkerInit(this.gol.Size);
             this.form.Redraw();
         }
 

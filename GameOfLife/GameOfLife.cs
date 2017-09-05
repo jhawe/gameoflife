@@ -15,7 +15,7 @@ namespace GameOfLife
         private bool[,] envir; // the current 'living environment'
         private bool[,] init; // always holds the initial field
         private int size;
-        private const int ENVIR_SIZE = 5;
+        private const int ENVIR_SIZE = 6;
         #endregion // Class Member
 
         #region Constructor
@@ -29,6 +29,11 @@ namespace GameOfLife
 
         public GameOfLife(bool[,] init, int size = ENVIR_SIZE)
         {
+            if (size < 5)
+            {
+                throw new Exception("Size has to be >= 5!");
+            }
+
             // member init
             this.envir = init;
             this.init = init;
@@ -60,7 +65,32 @@ namespace GameOfLife
 
         #region Methods
 
+        #region BlinkerInit
+        /// <summary>
+        /// Simple 'Blinker' init, placing three living cells
+        /// right next to each other on init
+        /// </summary>
+        /// <param name="size">The size of the environment</param>
+        internal void BlinkerInit(int size = ENVIR_SIZE)
+        {
+            bool[,] init = new bool[size, size];
+
+            // we set three living cells next to each other
+            // in one line
+            int half = size / 2;
+            init[half, half] = true;
+            init[half - 1, half] = true;
+            init[half + 1, half] = true;
+            this.envir = (bool[,])init.Clone();
+            this.init = init;
+        } 
+        #endregion // BlinkerInit
+
         #region RandomInit
+        /// <summary>
+        /// Performs random initialization of the environment
+        /// </summary>
+        /// <param name="size">The size of the environment</param>
         internal void RandomInit(int size = ENVIR_SIZE)
         {
             bool[,] init = new bool[size, size];
@@ -174,12 +204,12 @@ namespace GameOfLife
             // results vector
             int[] result = new int[8];
             int ridx = 0;
-            
+
             // iterate over all possible neighbouring fields
             for (int i = -1; i < 2; i++)
             {
                 for (int j = -1; j < 2; j++)
-                {                    
+                {
                     // the main cell itself, skip it
                     if (i == j && i == 0) continue;
                     // get neighbour coordinates

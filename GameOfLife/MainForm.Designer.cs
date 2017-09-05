@@ -37,12 +37,15 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btBlinker = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -53,6 +56,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             // 
             // splitContainer1.Panel2
@@ -144,6 +148,25 @@
             this.button2.Text = "Init new";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btBlinker);
+            this.groupBox2.Location = new System.Drawing.Point(13, 191);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(340, 343);
+            this.groupBox2.TabIndex = 6;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Special inits";
+            // 
+            // btBlinker
+            // 
+            this.btBlinker.Location = new System.Drawing.Point(7, 20);
+            this.btBlinker.Name = "btBlinker";
+            this.btBlinker.Size = new System.Drawing.Size(75, 23);
+            this.btBlinker.TabIndex = 0;
+            this.btBlinker.Text = "BlinkerInit";
+            this.btBlinker.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -159,6 +182,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.display)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -174,6 +198,8 @@
         private System.Windows.Forms.TextBox textBox1;
         internal System.Windows.Forms.Button button1;
         internal System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        internal System.Windows.Forms.Button btBlinker;
     }
 }
 
