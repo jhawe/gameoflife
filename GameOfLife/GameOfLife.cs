@@ -40,17 +40,46 @@ namespace GameOfLife
         }
         #endregion // Constructor
 
+        #region Properties
+        internal bool[,] Envir
+        {
+            get
+            {
+                return this.envir;
+            }
+        }
+
+        internal int Size
+        {
+            get
+            {
+                return this.size;
+            }
+        }
+        #endregion // Properties
+
         #region Methods
 
-        private void RandomInit(int size = ENVIR_SIZE)
+        #region RandomInit
+        internal void RandomInit(int size = ENVIR_SIZE)
         {
             bool[,] init = new bool[size, size];
-            init[1, 3] = true;
-            init[2, 3] = true;
-            init[3, 4] = true;
-            this.envir = init;
+
+            var r = new Random();
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    if (r.NextDouble() < 0.3)
+                    {
+                        init[i, j] = true;
+                    }
+                }
+            }
+            this.envir = (bool[,])init.Clone();
             this.init = init;
         }
+        #endregion // RandomInit
 
         #region Update
         /// <summary>
@@ -64,15 +93,14 @@ namespace GameOfLife
         {
             // local var
             bool[,] envir = this.envir;
-            // clone to set new values to
-            bool[,] copy = (bool[,])envir.Clone();
+            bool[,] copy = new bool[this.size, this.size];
 
             // perform some updates...
             for (int i = 0; i < generations; i++)
             {
-                // apply our update 
-                ApplyRules(envir, copy);
-                envir = copy;
+                // apply our update                 
+                ApplyRules(envir, out copy);
+                envir = (bool[,])copy.Clone();
             }
             // set the new environment
             this.envir = copy;
@@ -85,8 +113,10 @@ namespace GameOfLife
         /// </summary>
         /// <param name="envir"></param>
         /// <param name="copy"></param>        
-        private void ApplyRules(bool[,] envir, bool[,] copy)
+        private void ApplyRules(bool[,] envir, out bool[,] copy)
         {
+            copy = (bool[,])envir.Clone();
+
             // iterate over all cells and apply the rules
             for (int i = 0; i < this.size; i++)
             {
@@ -143,15 +173,13 @@ namespace GameOfLife
         {
             // results vector
             int[] result = new int[8];
-            int ridx = -1;
+            int ridx = 0;
+            
             // iterate over all possible neighbouring fields
             for (int i = -1; i < 2; i++)
             {
                 for (int j = -1; j < 2; j++)
-                {
-                    // generate indix at which to write result
-                    ridx = ((i) * (j) + i * (3 - (j))) + 3;
-
+                {                    
                     // the main cell itself, skip it
                     if (i == j && i == 0) continue;
                     // get neighbour coordinates
@@ -159,12 +187,12 @@ namespace GameOfLife
                     int ny = y + j;
                     // check outside x/y coordinate
                     int maxIdx = this.size - 1;
-                    if (nx < 0) x = maxIdx;
-                    if (ny < 0) y = maxIdx;
-                    if (nx > maxIdx) x = 0;
-                    if (ny > maxIdx) y = 0;
+                    if (nx < 0) nx = maxIdx;
+                    if (ny < 0) ny = maxIdx;
+                    if (nx > maxIdx) nx = 0;
+                    if (ny > maxIdx) ny = 0;
                     // now get the value at the current position
-                    bool v = envir[x, y];
+                    bool v = envir[nx, ny];
 
                     if (v)
                     {
@@ -174,6 +202,9 @@ namespace GameOfLife
                     {
                         result[ridx] = 0;
                     }
+
+                    // increase running idx
+                    ridx++;
                 }
             }
             return result;
@@ -185,11 +216,11 @@ namespace GameOfLife
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            for(int i = 0; i<this.size; i++)
+            for (int i = 0; i < this.size; i++)
             {
-                for(int j= 0; j < this.size; j++)
+                for (int j = 0; j < this.size; j++)
                 {
-                    sb.Append(this.envir[i,j]);
+                    sb.Append(this.envir[i, j]);
                 }
                 sb.AppendLine();
             }
