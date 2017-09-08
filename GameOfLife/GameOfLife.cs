@@ -54,11 +54,23 @@ namespace GameOfLife
             }
         }
 
+        internal void ToggleField(int xn, int yn)
+        {
+            if (xn >= 0 && xn < this.Size && yn >= 0 && yn < this.Size)
+            {
+                this.envir[xn, yn] = !this.envir[xn, yn];
+            }
+        }
+
         internal int Size
         {
             get
             {
                 return this.size;
+            }
+            set
+            {
+                this.size = value;
             }
         }
         #endregion // Properties
@@ -83,7 +95,7 @@ namespace GameOfLife
             init[half + 1, half] = true;
             this.envir = (bool[,])init.Clone();
             this.init = init;
-        } 
+        }
         #endregion // BlinkerInit
 
         #region RandomInit

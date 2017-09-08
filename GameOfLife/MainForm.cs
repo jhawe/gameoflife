@@ -14,11 +14,44 @@ namespace GameOfLife
     {
         internal GameOfLife model;
         private Controller controller;
+        //internal Bitmap bbDisplay;
+
         public MainForm()
         {
             InitializeComponent();
-            this.controller = new Controller(16, this);
+            this.controller = new Controller(this);
+
+            /*  this.SetStyle(
+            ControlStyles.UserPaint |
+            ControlStyles.AllPaintingInWmPaint |
+            ControlStyles.DoubleBuffer, true);
+
+              // code for those eventhandlers borrowed and adapted from 
+              // https://stackoverflow.com/a/7835149
+              this.ResizeEnd += new EventHandler(CreateBackBufferHandler);
+              this.Load += new EventHandler(CreateBackBufferHandler);
+              this.Paint += new PaintEventHandler(PaintHandler);
+              */
         }
+
+        /*
+        void PaintHandler(object sender, PaintEventArgs e)
+        {
+            if (this.bbDisplay != null)
+            {
+                e.Graphics.DrawImageUnscaled(this.bbDisplay, Point.Empty);
+            }
+        }
+
+        void CreateBackBufferHandler(object sender, EventArgs e)
+        {
+            if (this.bbDisplay != null)
+                this.bbDisplay.Dispose();
+
+            this.bbDisplay = (Bitmap)this.display.Image;
+            //new Bitmap(this.display.Width, this.display.Height);
+        }
+        */
 
         internal void Redraw()
         {
@@ -26,14 +59,13 @@ namespace GameOfLife
 
             // get picture box graphics
             Graphics g = this.display.CreateGraphics();
-            g.Clear(Color.White);
+            g.Clear(Color.Gray);
             // get size of individual boxes
-            int rsize = (int)Math.Min(this.display.Height, this.display.Width);
-            rsize /= m.Size;
+            int rsize = Statics.GetBoxSize(m, this.display);
 
             for (int i = 0; i < m.Size; i++)
             {
-                for(int j = 0; j < m.Size; j++)
+                for (int j = 0; j < m.Size; j++)
                 {
                     bool v = m.Envir[i, j];
                     Brush b;
@@ -48,6 +80,7 @@ namespace GameOfLife
 
                     g.FillRectangle(b, new Rectangle(i * rsize, j * rsize, rsize, rsize));
                 }
+
             }
             this.Invalidate();
         }
