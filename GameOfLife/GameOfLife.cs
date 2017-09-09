@@ -103,7 +103,7 @@ namespace GameOfLife
         /// Performs random initialization of the environment
         /// </summary>
         /// <param name="size">The size of the environment</param>
-        internal void RandomInit(int size = ENVIR_SIZE)
+        internal void RandomInit(int size = ENVIR_SIZE, float prob = 0.3f)
         {
             bool[,] init = new bool[size, size];
 
@@ -112,7 +112,7 @@ namespace GameOfLife
             {
                 for (int j = 0; j < size; j++)
                 {
-                    if (r.NextDouble() < 0.3)
+                    if (r.NextDouble() < prob)
                     {
                         init[i, j] = true;
                     }

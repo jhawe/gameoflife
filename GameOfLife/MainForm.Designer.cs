@@ -38,11 +38,14 @@
             this.btBlinker = new System.Windows.Forms.Button();
             this.btRandomInit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbSpeed = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbSize = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.display = new System.Windows.Forms.PictureBox();
+            this.nSize = new System.Windows.Forms.NumericUpDown();
+            this.nSpeed = new System.Windows.Forms.NumericUpDown();
+            this.nProbability = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -51,6 +54,10 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nProbability)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -61,6 +68,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox4);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
@@ -69,23 +77,26 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.display);
             this.splitContainer1.Size = new System.Drawing.Size(826, 488);
-            this.splitContainer1.SplitterDistance = 291;
+            this.splitContainer1.SplitterDistance = 276;
             this.splitContainer1.TabIndex = 0;
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.btRunGOL);
             this.groupBox3.Controls.Add(this.btNext);
-            this.groupBox3.Location = new System.Drawing.Point(12, 379);
+            this.groupBox3.Location = new System.Drawing.Point(12, 259);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(269, 56);
+            this.groupBox3.Size = new System.Drawing.Size(263, 56);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Controls";
             // 
             // btRunGOL
             // 
-            this.btRunGOL.Location = new System.Drawing.Point(9, 19);
+            this.btRunGOL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btRunGOL.Location = new System.Drawing.Point(179, 19);
             this.btRunGOL.Name = "btRunGOL";
             this.btRunGOL.Size = new System.Drawing.Size(75, 23);
             this.btRunGOL.TabIndex = 8;
@@ -94,30 +105,31 @@
             // 
             // btNext
             // 
-            this.btNext.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btNext.Location = new System.Drawing.Point(90, 19);
+            this.btNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btNext.Location = new System.Drawing.Point(115, 19);
             this.btNext.Name = "btNext";
-            this.btNext.Size = new System.Drawing.Size(67, 23);
+            this.btNext.Size = new System.Drawing.Size(61, 23);
             this.btNext.TabIndex = 0;
             this.btNext.Text = "Next";
             this.btNext.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.btBlinker);
-            this.groupBox2.Controls.Add(this.btRandomInit);
-            this.groupBox2.Location = new System.Drawing.Point(12, 190);
+            this.groupBox2.Location = new System.Drawing.Point(13, 189);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(268, 183);
+            this.groupBox2.Size = new System.Drawing.Size(262, 64);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Special inits";
             // 
             // button4
             // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Location = new System.Drawing.Point(171, 19);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
@@ -145,37 +157,28 @@
             // 
             // btRandomInit
             // 
-            this.btRandomInit.Location = new System.Drawing.Point(8, 49);
+            this.btRandomInit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btRandomInit.Location = new System.Drawing.Point(177, 55);
             this.btRandomInit.Name = "btRandomInit";
             this.btRandomInit.Size = new System.Drawing.Size(75, 23);
             this.btRandomInit.TabIndex = 5;
-            this.btRandomInit.Text = "RandomInit";
+            this.btRandomInit.Text = "Init";
             this.btRandomInit.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.tbSpeed);
+            this.groupBox1.Controls.Add(this.nSpeed);
+            this.groupBox1.Controls.Add(this.nSize);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.tbSize);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(276, 172);
+            this.groupBox1.Size = new System.Drawing.Size(261, 81);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Properties";
-            // 
-            // tbSpeed
-            // 
-            this.tbSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSpeed.Location = new System.Drawing.Point(91, 47);
-            this.tbSpeed.Name = "tbSpeed";
-            this.tbSpeed.Size = new System.Drawing.Size(178, 20);
-            this.tbSpeed.TabIndex = 7;
-            this.tbSpeed.Text = "0.2";
             // 
             // label3
             // 
@@ -185,16 +188,6 @@
             this.label3.Size = new System.Drawing.Size(74, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "Update speed";
-            // 
-            // tbSize
-            // 
-            this.tbSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSize.Location = new System.Drawing.Point(91, 19);
-            this.tbSize.Name = "tbSize";
-            this.tbSize.Size = new System.Drawing.Size(178, 20);
-            this.tbSize.TabIndex = 2;
-            this.tbSize.Text = "20";
             // 
             // label1
             // 
@@ -210,9 +203,113 @@
             this.display.Dock = System.Windows.Forms.DockStyle.Fill;
             this.display.Location = new System.Drawing.Point(0, 0);
             this.display.Name = "display";
-            this.display.Size = new System.Drawing.Size(531, 488);
+            this.display.Size = new System.Drawing.Size(546, 488);
             this.display.TabIndex = 0;
             this.display.TabStop = false;
+            // 
+            // nSize
+            // 
+            this.nSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nSize.Location = new System.Drawing.Point(198, 20);
+            this.nSize.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.nSize.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nSize.Name = "nSize";
+            this.nSize.Size = new System.Drawing.Size(57, 20);
+            this.nSize.TabIndex = 8;
+            this.nSize.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // nSpeed
+            // 
+            this.nSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nSpeed.DecimalPlaces = 2;
+            this.nSpeed.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.nSpeed.Location = new System.Drawing.Point(198, 46);
+            this.nSpeed.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.nSpeed.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.nSpeed.Name = "nSpeed";
+            this.nSpeed.Size = new System.Drawing.Size(57, 20);
+            this.nSpeed.TabIndex = 9;
+            this.nSpeed.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            // 
+            // nProbability
+            // 
+            this.nProbability.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nProbability.DecimalPlaces = 2;
+            this.nProbability.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nProbability.Location = new System.Drawing.Point(193, 23);
+            this.nProbability.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nProbability.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nProbability.Name = "nProbability";
+            this.nProbability.Size = new System.Drawing.Size(59, 20);
+            this.nProbability.TabIndex = 10;
+            this.nProbability.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(113, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Probability of living cell";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.nProbability);
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.btRandomInit);
+            this.groupBox4.Location = new System.Drawing.Point(12, 99);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(261, 84);
+            this.groupBox4.TabIndex = 12;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Random initialization";
             // 
             // MainForm
             // 
@@ -231,6 +328,11 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.display)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nProbability)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -248,10 +350,13 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.TextBox tbSize;
-        internal System.Windows.Forms.TextBox tbSpeed;
         internal System.Windows.Forms.Button btRunGOL;
         private System.Windows.Forms.GroupBox groupBox3;
+        internal System.Windows.Forms.NumericUpDown nSpeed;
+        internal System.Windows.Forms.NumericUpDown nSize;
+        private System.Windows.Forms.GroupBox groupBox4;
+        internal System.Windows.Forms.NumericUpDown nProbability;
+        private System.Windows.Forms.Label label2;
     }
 }
 

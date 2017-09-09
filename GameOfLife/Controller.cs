@@ -27,30 +27,34 @@ namespace GameOfLife
             // member init
             this.form = form;
             // get size
-            this.golSize = Int32.Parse(this.form.tbSize.Text);
+            this.golSize = (int)this.form.nSize.Value;
             this.gol = new GameOfLife(this.golSize);
             this.form = form;
             this.form.model = this.gol;
+            this.form.display.Cursor = Cursors.Hand;
             // add some event handlers
             this.form.btNext.Click += OnUpdateClick;
             this.form.btRandomInit.Click += OnInitNewClick;
             this.form.display.MouseClick += OnDisplayMouseClick;
-            this.form.tbSize.TextChanged += OnSizeChanged;
+            this.form.nSize.ValueChanged += OnSizeChanged;
             this.form.btRunGOL.Click += OnRunGOLClick;
-            this.form.tbSpeed.TextChanged += OnSpeedChanged;
+            this.form.nSpeed.ValueChanged += OnSpeedChanged;
+            this.form.Resize += OnFormResize;
+            this.form.SizeChanged += OnFormResize;
+            this.form.ResizeEnd += OnFormResize;
             // the special init buttons
             this.form.btBlinker.Click += OnInitBlinker;
+            this.form.Redraw();
+        }        
+
+        private void OnFormResize(object sender, EventArgs e)
+        {
             this.form.Redraw();
         }
 
         private void OnSpeedChanged(object sender, EventArgs e)
-        {
-            float.TryParse(this.form.tbSpeed.Text, out this.speed);
-            if(this.speed < 0.001)
-            {
-                this.form.tbSpeed.Text = "0.3";
-                this.speed = 0.3f;
-            }
+        {            
+            this.speed = (float)this.form.nSpeed.Value;            
         }
 
         private void OnRunGOLClick(object sender, EventArgs e)
@@ -97,13 +101,8 @@ namespace GameOfLife
 
         private void OnSizeChanged(object sender, EventArgs e)
         {
-            string s = ((TextBox)sender).Text;
-            Int32.TryParse(s, out this.golSize);
-            if (this.golSize < GOL_MIN_SIZE)
-            {
-                this.golSize = GOL_MIN_SIZE;
-                ((TextBox)sender).Text = GOL_MIN_SIZE.ToString();
-            }
+            this.run = false;
+            this.golSize = (int)this.form.nSize.Value;            
             this.gol.Size = this.golSize;
         }
 
@@ -114,9 +113,11 @@ namespace GameOfLife
             int y = e.Location.Y;
             // get the according field
             // get size of individual boxes
-            int rsize = Statics.GetBoxSize(this.gol, (Control)sender);
-            int xn = (int)Math.Floor(x * 1.0 / rsize);
-            int yn = (int)Math.Floor(y * 1.0 / rsize);
+            int sizeX = 0;
+            int sizeY = 0;
+            Statics.GetBoxSize(this.gol, (Control)sender, out sizeX, out sizeY);
+            int xn = (int)Math.Floor(x * 1.0 / sizeX);
+            int yn = (int)Math.Floor(y * 1.0 / sizeY);
             // toggle the corresponding field
             this.gol.ToggleField(xn, yn);
             this.form.Redraw();
@@ -131,7 +132,7 @@ namespace GameOfLife
 
         private void OnInitNewClick(object sender, EventArgs e)
         {
-            this.gol.RandomInit(this.golSize);
+            this.gol.RandomInit(this.golSize, (float)this.form.nProbability.Value);
             this.form.Redraw();
         }
 

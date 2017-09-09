@@ -29,8 +29,10 @@ namespace GameOfLife
             Bitmap bm = new Bitmap(this.display.Width, this.display.Height);
             Graphics g = Graphics.FromImage(bm);
             g.Clear(Color.Gray);
+            int sizeX = 0;
+            int sizeY = 0;
             // get size of individual boxes
-            int rsize = Statics.GetBoxSize(m, this.display);
+            Statics.GetBoxSize(m, this.display, out sizeX, out sizeY);
 
             for (int i = 0; i < m.Size; i++)
             {
@@ -47,7 +49,7 @@ namespace GameOfLife
                         b = new SolidBrush(Color.White);
                     }
 
-                    g.FillRectangle(b, new Rectangle(i * rsize, j * rsize, rsize, rsize));
+                    g.FillRectangle(b, new Rectangle(i * sizeX, j * sizeY, sizeX, sizeY));
                 }
 
             }

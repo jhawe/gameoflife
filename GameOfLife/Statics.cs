@@ -16,12 +16,11 @@ namespace GameOfLife
         /// <param name="gol"></param>
         /// <param name="display"></param>
         /// <returns></returns>
-        internal static int GetBoxSize(GameOfLife gol, Control display)
+        internal static void GetBoxSize(GameOfLife gol, Control display, out int sizeX, out int sizeY)
         {
             // get size of individual boxes
-            int rsize = (int)Math.Min(display.Height, display.Width);
-            rsize /= gol.Size;
-            return (rsize);
+            sizeX = display.Width / gol.Size;
+            sizeY = display.Height / gol.Size;            
         }
 
         /// <summary>
