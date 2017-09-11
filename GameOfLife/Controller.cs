@@ -44,8 +44,22 @@ namespace GameOfLife
             this.form.ResizeEnd += OnFormResize;
             // the special init buttons
             this.form.btBlinker.Click += OnInitBlinker;
+            this.form.btGleiter.Click += OnInitGleiter;
+            this.form.btPentomino.Click += OnInitPentomino;
             this.form.Redraw();
-        }        
+        }
+
+        private void OnInitPentomino(object sender, EventArgs e)
+        {
+            this.gol.PentominoInit(this.golSize);
+            this.form.Redraw();
+        }
+
+        private void OnInitGleiter(object sender, EventArgs e)
+        {
+            this.gol.GleiterInit(this.golSize);
+            this.form.Redraw();
+        }
 
         private void OnFormResize(object sender, EventArgs e)
         {

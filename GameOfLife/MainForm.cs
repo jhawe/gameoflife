@@ -18,12 +18,15 @@ namespace GameOfLife
         public MainForm()
         {
             InitializeComponent();
-            this.controller = new Controller(this);
+            this.controller = new Controller(this);            
         }
 
         internal void Redraw()
         {
             GameOfLife m = this.model;
+
+            // get generation info
+            this.lGeneration.Text = m.Generation.ToString();
 
             // get picture box graphics
             Bitmap bm = new Bitmap(this.display.Width, this.display.Height);

@@ -16,6 +16,7 @@ namespace GameOfLife
         private bool[,] init; // always holds the initial field
         private int size;
         private const int ENVIR_SIZE = 6;
+        private int generation = 1;
         #endregion // Class Member
 
         #region Constructor
@@ -46,6 +47,15 @@ namespace GameOfLife
         #endregion // Constructor
 
         #region Properties
+
+        internal int Generation
+        {
+            get
+            {
+                return this.generation;
+            }
+        }
+
         internal bool[,] Envir
         {
             get
@@ -85,6 +95,7 @@ namespace GameOfLife
         /// <param name="size">The size of the environment</param>
         internal void BlinkerInit(int size = ENVIR_SIZE)
         {
+            this.generation = 1;
             bool[,] init = new bool[size, size];
 
             // we set three living cells next to each other
@@ -105,6 +116,7 @@ namespace GameOfLife
         /// <param name="size">The size of the environment</param>
         internal void RandomInit(int size = ENVIR_SIZE, float prob = 0.3f)
         {
+            this.generation = 1;
             bool[,] init = new bool[size, size];
 
             var r = new Random();
@@ -123,6 +135,61 @@ namespace GameOfLife
         }
         #endregion // RandomInit
 
+        #region GleiterInit
+        /// <summary>
+        /// Initializes a "gleiter" in the middle of the environment
+        /// </summary>
+        /// <param name="size"></param>
+        internal void GleiterInit(int size = ENVIR_SIZE)
+        {
+            this.generation = 1;
+            bool[,] init = new bool[size, size];
+
+            // we set three living cells next to each other
+            // in one line
+            int half = size / 2;
+            init[half, half] = true;
+            init[half - 1, half] = true;
+            init[half + 1, half] = true;
+            // one on the top of the last one
+            init[half + 1, half - 1] = true;
+            // one on top left of the last one
+            init[half, half - 2] = true;
+
+            this.envir = (bool[,])init.Clone();
+            this.init = init;
+        }
+        #endregion // GleiterInit
+
+        #region PentominoInit
+        /// <summary>
+        /// Initializes a "Pentomino" in the middle of the environment
+        /// </summary>
+        /// <param name="size"></param>
+        internal void PentominoInit(int size = ENVIR_SIZE)
+        {
+            // ensure minimum size 
+            if (size < 10) throw new Exception("Envir size too small.");
+
+            this.generation = 1;
+            bool[,] init = new bool[size, size];
+
+            // we set three living cells next to each other
+            // in one vertical line
+            int half = size / 2;
+            init[half, half] = true;
+            init[half, half - 1] = true;
+            init[half, half + 1] = true;
+            // one to the left of the middle one
+            init[half - 1, half] = true;
+            // one on top left of the last one
+            init[half + 1, half - 1] = true;
+
+            this.envir = (bool[,])init.Clone();
+            this.init = init;
+        }
+        #endregion // PentominoInit
+
         #region Update
         /// <summary>
         /// performs an update of the gol, i.e. calculates the next
@@ -140,6 +207,8 @@ namespace GameOfLife
             // perform some updates...
             for (int i = 0; i < generations; i++)
             {
+                this.generation++;
+
                 // apply our update                 
                 ApplyRules(envir, out copy);
                 envir = (bool[,])copy.Clone();
