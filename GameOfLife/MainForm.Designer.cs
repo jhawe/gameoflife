@@ -29,11 +29,15 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lGeneration = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.nProbability = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.btRandomInit = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.plColor = new System.Windows.Forms.Panel();
+            this.btChooseColor = new System.Windows.Forms.Button();
+            this.cbDrawFancy = new System.Windows.Forms.CheckBox();
             this.btRunGOL = new System.Windows.Forms.Button();
             this.btNext = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -46,8 +50,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.display = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lGeneration = new System.Windows.Forms.Label();
+            this.cbRandomColoring = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -71,7 +74,6 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.lGeneration);
-            this.splitContainer1.Panel1.Controls.Add(this.label4);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox4);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
@@ -84,6 +86,15 @@
             this.splitContainer1.Size = new System.Drawing.Size(826, 488);
             this.splitContainer1.SplitterDistance = 276;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // lGeneration
+            // 
+            this.lGeneration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lGeneration.AutoSize = true;
+            this.lGeneration.Location = new System.Drawing.Point(12, 466);
+            this.lGeneration.Name = "lGeneration";
+            this.lGeneration.Size = new System.Drawing.Size(0, 13);
+            this.lGeneration.TabIndex = 14;
             // 
             // groupBox4
             // 
@@ -146,19 +157,49 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.cbRandomColoring);
+            this.groupBox3.Controls.Add(this.plColor);
+            this.groupBox3.Controls.Add(this.btChooseColor);
+            this.groupBox3.Controls.Add(this.cbDrawFancy);
             this.groupBox3.Controls.Add(this.btRunGOL);
             this.groupBox3.Controls.Add(this.btNext);
             this.groupBox3.Location = new System.Drawing.Point(12, 259);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(263, 56);
+            this.groupBox3.Size = new System.Drawing.Size(263, 127);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Controls";
             // 
+            // plColor
+            // 
+            this.plColor.Location = new System.Drawing.Point(112, 21);
+            this.plColor.Name = "plColor";
+            this.plColor.Size = new System.Drawing.Size(22, 21);
+            this.plColor.TabIndex = 11;
+            // 
+            // btChooseColor
+            // 
+            this.btChooseColor.Location = new System.Drawing.Point(6, 20);
+            this.btChooseColor.Name = "btChooseColor";
+            this.btChooseColor.Size = new System.Drawing.Size(99, 23);
+            this.btChooseColor.TabIndex = 10;
+            this.btChooseColor.Text = "Choose field color";
+            this.btChooseColor.UseVisualStyleBackColor = true;
+            // 
+            // cbDrawFancy
+            // 
+            this.cbDrawFancy.AutoSize = true;
+            this.cbDrawFancy.Location = new System.Drawing.Point(6, 49);
+            this.cbDrawFancy.Name = "cbDrawFancy";
+            this.cbDrawFancy.Size = new System.Drawing.Size(126, 17);
+            this.cbDrawFancy.TabIndex = 9;
+            this.cbDrawFancy.Text = "Use gradient coloring";
+            this.cbDrawFancy.UseVisualStyleBackColor = true;
+            // 
             // btRunGOL
             // 
             this.btRunGOL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btRunGOL.Location = new System.Drawing.Point(179, 19);
+            this.btRunGOL.Location = new System.Drawing.Point(182, 99);
             this.btRunGOL.Name = "btRunGOL";
             this.btRunGOL.Size = new System.Drawing.Size(75, 23);
             this.btRunGOL.TabIndex = 8;
@@ -168,7 +209,7 @@
             // btNext
             // 
             this.btNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btNext.Location = new System.Drawing.Point(115, 19);
+            this.btNext.Location = new System.Drawing.Point(115, 99);
             this.btNext.Name = "btNext";
             this.btNext.Size = new System.Drawing.Size(61, 23);
             this.btNext.TabIndex = 0;
@@ -310,22 +351,15 @@
             this.display.TabIndex = 0;
             this.display.TabStop = false;
             // 
-            // label4
+            // cbRandomColoring
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 463);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Generation:";
-            // 
-            // lGeneration
-            // 
-            this.lGeneration.AutoSize = true;
-            this.lGeneration.Location = new System.Drawing.Point(75, 463);
-            this.lGeneration.Name = "lGeneration";
-            this.lGeneration.Size = new System.Drawing.Size(0, 13);
-            this.lGeneration.TabIndex = 14;
+            this.cbRandomColoring.AutoSize = true;
+            this.cbRandomColoring.Location = new System.Drawing.Point(6, 73);
+            this.cbRandomColoring.Name = "cbRandomColoring";
+            this.cbRandomColoring.Size = new System.Drawing.Size(143, 17);
+            this.cbRandomColoring.TabIndex = 12;
+            this.cbRandomColoring.Text = "Random stained coloring";
+            this.cbRandomColoring.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -344,6 +378,7 @@
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nProbability)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -373,9 +408,12 @@
         internal System.Windows.Forms.NumericUpDown nProbability;
         private System.Windows.Forms.Label label2;
         internal System.Windows.Forms.Label lGeneration;
-        private System.Windows.Forms.Label label4;
         internal System.Windows.Forms.Button btGleiter;
         internal System.Windows.Forms.Button btPentomino;
+        internal System.Windows.Forms.CheckBox cbDrawFancy;
+        internal System.Windows.Forms.Button btChooseColor;
+        internal System.Windows.Forms.Panel plColor;
+        internal System.Windows.Forms.CheckBox cbRandomColoring;
     }
 }
 

@@ -47,7 +47,11 @@ namespace GameOfLife
         #endregion // Constructor
 
         #region Properties
-
+        
+        #region Generation
+        /// <summary>
+        /// Gets the current generation number
+        /// </summary>
         internal int Generation
         {
             get
@@ -55,7 +59,12 @@ namespace GameOfLife
                 return this.generation;
             }
         }
+        #endregion // Generation
 
+        #region Envir
+        /// <summary>
+        /// Gets the current GOL environment
+        /// </summary>
         internal bool[,] Envir
         {
             get
@@ -63,15 +72,12 @@ namespace GameOfLife
                 return this.envir;
             }
         }
-
-        internal void ToggleField(int xn, int yn)
-        {
-            if (xn >= 0 && xn < this.Size && yn >= 0 && yn < this.Size)
-            {
-                this.envir[xn, yn] = !this.envir[xn, yn];
-            }
-        }
-
+        #endregion // Envir
+                
+        #region Size
+        /// <summary>
+        /// Size of the current GOL instance
+        /// </summary>
         internal int Size
         {
             get
@@ -83,9 +89,27 @@ namespace GameOfLife
                 this.size = value;
             }
         }
+        #endregion // Size
+
         #endregion // Properties
 
         #region Methods
+
+        #region ToggleField
+        /// <summary>
+        /// Toggles a field to be dead or alive depedening on 
+        /// its current state
+        /// </summary>
+        /// <param name="xn">X position of field</param>
+        /// <param name="yn">Y position of field</param>
+        internal void ToggleField(int xn, int yn)
+        {
+            if (xn >= 0 && xn < this.Size && yn >= 0 && yn < this.Size)
+            {
+                this.envir[xn, yn] = !this.envir[xn, yn];
+            }
+        }
+        #endregion // ToggleField
 
         #region BlinkerInit
         /// <summary>
@@ -280,7 +304,7 @@ namespace GameOfLife
         /// /// <param name="y">The y coordiante of the cell for which to get 
         /// the neighbourhood</param>
         /// <returns></returns>
-        private int[] GetNeighbourhood(bool[,] envir, int x, int y)
+        internal int[] GetNeighbourhood(bool[,] envir, int x, int y)
         {
             // results vector
             int[] result = new int[8];
