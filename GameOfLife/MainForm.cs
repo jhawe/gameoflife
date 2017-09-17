@@ -26,7 +26,7 @@ namespace GameOfLife
             // member init
             InitializeComponent();
             this.controller = new Controller(this);
-        } 
+        }
         #endregion // Constructor
 
         #region Redraw
@@ -57,14 +57,22 @@ namespace GameOfLife
             // drawing on display
             Bitmap bm = new Bitmap(this.display.Width, this.display.Height);
             Graphics g = Graphics.FromImage(bm);
+
             g.Clear(Color.Gray);
             int sizeX = 0;
             int sizeY = 0;
             // get size of individual boxes
             Statics.GetBoxSize(m, this.display, out sizeX, out sizeY);
-
             // for random coloring
             Random rnd = new Random();
+
+            // set background color
+            Color bgCol = Color.White;
+            if (this.controller.FlickerBG && rnd.NextDouble() > 0.7)
+            {
+                bgCol = fc;
+            }
+
             for (int i = 0; i < m.Size; i++)
             {
                 for (int j = 0; j < m.Size; j++)
@@ -94,7 +102,7 @@ namespace GameOfLife
                     }
                     else
                     {
-                        b = new SolidBrush(Color.White);
+                        b = new SolidBrush(bgCol);
                     }
                     // draw the actual field
                     g.FillRectangle(b, new Rectangle(i * sizeX, j * sizeY, sizeX, sizeY));
@@ -104,7 +112,7 @@ namespace GameOfLife
             // draw the buffer to the display
             this.display.CreateGraphics().DrawImage(bm, new Point(0, 0));
             this.Invalidate();
-        } 
+        }
         #endregion // Redraw
     }
 }

@@ -17,6 +17,7 @@ namespace GameOfLife
         private int size;
         private const int ENVIR_SIZE = 6;
         private int generation = 1;
+        private bool infinite = true;
         #endregion // Class Member
 
         #region Constructor
@@ -47,7 +48,7 @@ namespace GameOfLife
         #endregion // Constructor
 
         #region Properties
-        
+
         #region Generation
         /// <summary>
         /// Gets the current generation number
@@ -73,7 +74,7 @@ namespace GameOfLife
             }
         }
         #endregion // Envir
-                
+
         #region Size
         /// <summary>
         /// Size of the current GOL instance
@@ -90,6 +91,18 @@ namespace GameOfLife
             }
         }
         #endregion // Size
+
+        public bool Infinite
+        {
+            get
+            {
+                return this.infinite;
+            }
+            internal set
+            {
+                this.infinite = value;
+            }
+        }
 
         #endregion // Properties
 
@@ -322,10 +335,22 @@ namespace GameOfLife
                     int ny = y + j;
                     // check outside x/y coordinate
                     int maxIdx = this.size - 1;
-                    if (nx < 0) nx = maxIdx;
-                    if (ny < 0) ny = maxIdx;
-                    if (nx > maxIdx) nx = 0;
-                    if (ny > maxIdx) ny = 0;
+                    if (Infinite)
+                    {
+                        if (nx < 0) nx = maxIdx;
+                        if (ny < 0) ny = maxIdx;
+                        if (nx > maxIdx) nx = 0;
+                        if (ny > maxIdx) ny = 0;
+                    }
+                    // in that case, the field is not infinite
+                    // but the field would be outside the envir,
+                    // so we dont count the current field
+                    if (nx < 0 || ny < 0 || nx > maxIdx || ny > maxIdx)
+                    {
+                        result[ridx] = 0;
+                        continue;
+                    }
+
                     // now get the value at the current position
                     bool v = envir[nx, ny];
 

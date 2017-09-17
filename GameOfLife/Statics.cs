@@ -18,9 +18,10 @@ namespace GameOfLife
         /// <returns></returns>
         internal static void GetBoxSize(GameOfLife gol, Control display, out int sizeX, out int sizeY)
         {
-            // get size of individual boxes
-            sizeX = display.Width / gol.Size;
-            sizeY = display.Height / gol.Size;            
+            // get size of individual boxes, make it square always
+            float reference = Math.Min(display.Width, display.Height);
+            sizeX = (int)Math.Floor(reference / gol.Size);
+            sizeY = sizeX;
         }
 
         /// <summary>
@@ -31,9 +32,9 @@ namespace GameOfLife
         internal static bool EnvirEmpty(GameOfLife gol)
         {
             bool[,] envir = gol.Envir;
-            for(int i = 0; i < gol.Size; i++)
+            for (int i = 0; i < gol.Size; i++)
             {
-                for(int j = 0;j<gol.Size; j++)
+                for (int j = 0; j < gol.Size; j++)
                 {
                     if (envir[i, j])
                     {

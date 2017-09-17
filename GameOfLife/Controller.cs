@@ -39,7 +39,7 @@ namespace GameOfLife
             SetNeedsInit(true);
             // init color dialog
             this.colorDialog = new ColorDialog();
-            this.colorDialog.Color = Color.Black;
+            this.colorDialog.Color = Color.DarkGreen;
             this.form.plColor.BackColor = this.colorDialog.Color;
 
             // get size
@@ -62,12 +62,13 @@ namespace GameOfLife
             this.form.btChooseColor.Click += OnChooseColorClick;
             this.form.cbDrawFancy.CheckedChanged += OnUseFancyCheckChanged;
             this.form.cbRandomColoring.CheckedChanged += OnUseRandomColorChanged;
+            this.form.cbInfinityEnvir.CheckedChanged += OnInfiniteEnvironmentChanged;
             // the special init buttons
             this.form.btBlinker.Click += OnInitBlinker;
             this.form.btGleiter.Click += OnInitGleiter;
             this.form.btPentomino.Click += OnInitPentomino;
             this.form.Redraw();
-        }
+        }        
         #endregion // Constructor
 
         #region Properties
@@ -85,6 +86,16 @@ namespace GameOfLife
             }
         }
         #endregion // DrawFancy
+
+        #region FlickerBG
+        internal bool FlickerBG
+        {
+            get
+            {
+                return this.form.cbFlickerBG.Checked;
+            }
+        }
+        #endregion //FlickerBG
 
         #region FieldColor
         internal Color FieldColor
@@ -155,6 +166,12 @@ namespace GameOfLife
             this.form.Redraw();
         }
 
+        #region OnRunGOLClick
+        /// <summary>
+        /// Handles Click on "Start" button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnRunGOLClick(object sender, EventArgs e)
         {
             Button rbt = (Button)sender;
@@ -177,8 +194,16 @@ namespace GameOfLife
                 this.run = false;
                 this.timer.Stop();
             }
-        }
+        } 
+        #endregion // OnRunGOLClick
 
+        #region TimerTick
+        /// <summary>
+        /// Handles timer tick event. Calculates new generation
+        /// and updates view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TimerTick(object sender, EventArgs e)
         {
             // check whether we somewhere stopped the timer
@@ -204,7 +229,8 @@ namespace GameOfLife
                 this.timer.Stop();
                 this.run = false;
             }
-        }
+        } 
+        #endregion // TimerTick
 
         #region OnSizeChanged
         private void OnSizeChanged(object sender, EventArgs e)
@@ -218,7 +244,20 @@ namespace GameOfLife
             SetNeedsInit(true);
         }
         #endregion // OnSizeChanged
-
+        
+        #region OnInfiniteEnvironmentChanged
+        /// <summary>
+        /// Handles checked change event o finfinitie envir toggle
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnInfiniteEnvironmentChanged(object sender, EventArgs e)
+        {
+            this.gol.Infinite = this.form.cbInfinityEnvir.Checked;
+            this.form.Redraw();
+        }
+        #endregion // OnInfiniteEnvironmentChanged
+        
         #region OnDisplayMouseClick
         /// <summary>
         /// Handles click on the display and toggles the corresponding field
