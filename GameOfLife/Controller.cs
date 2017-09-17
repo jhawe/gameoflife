@@ -30,6 +30,8 @@ namespace GameOfLife
         private ColorDialog colorDialog;
         private ColorDialog bgColorDialog;
         private Color[,] fieldColors;
+        // for random coloring mostly
+        internal static Random RNG = new Random();
         #endregion // Class Member
 
         #region Constructor
