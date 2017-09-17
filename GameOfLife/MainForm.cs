@@ -42,10 +42,10 @@ namespace GameOfLife
 
             GameOfLife m = this.model;
 
-            // get generation info
+            // show generation info
             this.lGeneration.Text = "Generation: " + m.Generation.ToString();
 
-            // flag whether to use 'fancy graphics'
+            // flag whether to use 'fancy graphics' i.e. gradient coloring
             bool fancy = this.controller.DrawFancy;
             // flag whether to use random colors
             bool random = this.controller.UseRandomColor;
@@ -67,10 +67,10 @@ namespace GameOfLife
             Random rnd = new Random();
 
             // set background color
-            Color bgCol = Color.White;
+            Color bgCol = this.controller.BGColor;
             if (this.controller.FlickerBG && rnd.NextDouble() > 0.7)
             {
-                bgCol = fc;
+                bgCol = Color.Transparent;
             }
 
             for (int i = 0; i < m.Size; i++)

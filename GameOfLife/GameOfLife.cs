@@ -22,13 +22,12 @@ namespace GameOfLife
 
         #region Constructor
         /// <summary>
-        /// 
+        /// Constructor
         /// </summary>
         public GameOfLife(int size = ENVIR_SIZE) : this(null, size)
         {
             // member init
         }
-
         public GameOfLife(bool[,] init, int size = ENVIR_SIZE)
         {
             if (size < 5)
@@ -92,6 +91,11 @@ namespace GameOfLife
         }
         #endregion // Size
 
+        #region Infinite
+        /// <summary>
+        /// Sets/gets flag whether the environment is infinite (i.e. goes across boundaries)
+        /// or not
+        /// </summary>
         public bool Infinite
         {
             get
@@ -102,7 +106,8 @@ namespace GameOfLife
             {
                 this.infinite = value;
             }
-        }
+        } 
+        #endregion // Infinite
 
         #endregion // Properties
 
@@ -257,7 +262,8 @@ namespace GameOfLife
 
         #region ApplyRules
         /// <summary>
-        /// 
+        /// Applies the GOL rules to all cells of an environment and
+        /// saves the result in the supplied copied environment
         /// </summary>
         /// <param name="envir"></param>
         /// <param name="copy"></param>        

@@ -12,6 +12,9 @@ namespace GameOfLife
     public class Controller
     {
         #region Class Member
+        /// <summary>
+        /// Class member definitions
+        /// </summary>
         GameOfLife gol;
         const int GOL_MIN_SIZE = 5;
         int golSize;
@@ -25,6 +28,7 @@ namespace GameOfLife
         private float speed;
         private bool needsInit;
         private ColorDialog colorDialog;
+        private ColorDialog bgColorDialog;
         #endregion // Class Member
 
         #region Constructor
@@ -41,6 +45,11 @@ namespace GameOfLife
             this.colorDialog = new ColorDialog();
             this.colorDialog.Color = Color.DarkGreen;
             this.form.plColor.BackColor = this.colorDialog.Color;
+
+            // init bg color dialog
+            this.bgColorDialog = new ColorDialog();
+            this.bgColorDialog.Color = Color.White;
+            this.form.plBGColor.BackColor = this.bgColorDialog.Color;
 
             // get size
             this.golSize = (int)this.form.nSize.Value;
@@ -63,12 +72,13 @@ namespace GameOfLife
             this.form.cbDrawFancy.CheckedChanged += OnUseFancyCheckChanged;
             this.form.cbRandomColoring.CheckedChanged += OnUseRandomColorChanged;
             this.form.cbInfinityEnvir.CheckedChanged += OnInfiniteEnvironmentChanged;
+            this.form.btBGColor.Click += OnChooseBGColorClick;
             // the special init buttons
             this.form.btBlinker.Click += OnInitBlinker;
             this.form.btGleiter.Click += OnInitGleiter;
             this.form.btPentomino.Click += OnInitPentomino;
             this.form.Redraw();
-        }        
+        }
         #endregion // Constructor
 
         #region Properties
@@ -88,6 +98,9 @@ namespace GameOfLife
         #endregion // DrawFancy
 
         #region FlickerBG
+        /// <summary>
+        /// Gets flag whether to flicker the background when drawing
+        /// </summary>
         internal bool FlickerBG
         {
             get
@@ -97,7 +110,23 @@ namespace GameOfLife
         }
         #endregion //FlickerBG
 
+        #region BGColor
+        /// <summary>
+        /// Gets the field color to be used for drawing
+        /// </summary>
+        internal Color BGColor
+        {
+            get
+            {
+                return this.bgColorDialog.Color;
+            }
+        }
+        #endregion // BGColor
+
         #region FieldColor
+        /// <summary>
+        /// Gets the field color to be used for drawing
+        /// </summary>
         internal Color FieldColor
         {
             get
@@ -108,6 +137,9 @@ namespace GameOfLife
         #endregion // FieldColor
 
         #region UseRandomColor
+        /// <summary>
+        /// Gets flag whether to use random coloring of fields
+        /// </summary>
         internal bool UseRandomColor
         {
             get
@@ -116,6 +148,7 @@ namespace GameOfLife
             }
         }
         #endregion // UseRandomColor
+
 
         #endregion // Properties
 
@@ -154,6 +187,23 @@ namespace GameOfLife
         {
             this.form.Redraw();
         }
+
+        #region OnChooseBGColorClick
+        /// <summary>
+        /// handles click on button to choose bg color
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnChooseBGColorClick(object sender, EventArgs e)
+        {
+            DialogResult dr = this.bgColorDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                this.form.plBGColor.BackColor = this.bgColorDialog.Color;
+                this.form.Redraw();
+            }
+        }
+        #endregion // OnChooseBGColorClick
 
         private void OnUseRandomColorChanged(object sender, EventArgs e)
         {

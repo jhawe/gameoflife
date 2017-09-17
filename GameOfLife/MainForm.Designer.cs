@@ -53,6 +53,8 @@
             this.cbRandomColoring = new System.Windows.Forms.CheckBox();
             this.cbFlickerBG = new System.Windows.Forms.CheckBox();
             this.cbInfinityEnvir = new System.Windows.Forms.CheckBox();
+            this.btBGColor = new System.Windows.Forms.Button();
+            this.plBGColor = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -159,6 +161,8 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.plBGColor);
+            this.groupBox3.Controls.Add(this.btBGColor);
             this.groupBox3.Controls.Add(this.cbInfinityEnvir);
             this.groupBox3.Controls.Add(this.cbFlickerBG);
             this.groupBox3.Controls.Add(this.cbRandomColoring);
@@ -176,7 +180,7 @@
             // 
             // plColor
             // 
-            this.plColor.Location = new System.Drawing.Point(112, 38);
+            this.plColor.Location = new System.Drawing.Point(91, 38);
             this.plColor.Name = "plColor";
             this.plColor.Size = new System.Drawing.Size(22, 21);
             this.plColor.TabIndex = 11;
@@ -185,9 +189,9 @@
             // 
             this.btChooseColor.Location = new System.Drawing.Point(6, 37);
             this.btChooseColor.Name = "btChooseColor";
-            this.btChooseColor.Size = new System.Drawing.Size(99, 23);
+            this.btChooseColor.Size = new System.Drawing.Size(77, 23);
             this.btChooseColor.TabIndex = 10;
-            this.btChooseColor.Text = "Choose field color";
+            this.btChooseColor.Text = "Field color";
             this.btChooseColor.UseVisualStyleBackColor = true;
             // 
             // cbDrawFancy
@@ -387,6 +391,22 @@
             this.cbInfinityEnvir.Text = "Infinite environment";
             this.cbInfinityEnvir.UseVisualStyleBackColor = true;
             // 
+            // btBGColor
+            // 
+            this.btBGColor.Location = new System.Drawing.Point(135, 37);
+            this.btBGColor.Name = "btBGColor";
+            this.btBGColor.Size = new System.Drawing.Size(70, 23);
+            this.btBGColor.TabIndex = 15;
+            this.btBGColor.Text = "BG color";
+            this.btBGColor.UseVisualStyleBackColor = true;
+            // 
+            // plBGColor
+            // 
+            this.plBGColor.Location = new System.Drawing.Point(211, 38);
+            this.plBGColor.Name = "plBGColor";
+            this.plBGColor.Size = new System.Drawing.Size(22, 21);
+            this.plBGColor.TabIndex = 12;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -442,6 +462,8 @@
         internal System.Windows.Forms.CheckBox cbRandomColoring;
         internal System.Windows.Forms.CheckBox cbFlickerBG;
         internal System.Windows.Forms.CheckBox cbInfinityEnvir;
+        internal System.Windows.Forms.Panel plBGColor;
+        internal System.Windows.Forms.Button btBGColor;
     }
 }
 
