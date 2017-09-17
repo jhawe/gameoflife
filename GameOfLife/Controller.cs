@@ -284,8 +284,7 @@ namespace GameOfLife
             this.form.cbFlickerBG.Enabled = !v;            
             this.form.cbRandomColoring.Enabled = !v;
             this.form.cbDrawFancy.Enabled = !v;
-            this.form.btChooseColor.Enabled = !v;
-            this.form.btBGColor.Enabled = !v;
+            this.form.btChooseColor.Enabled = !v;            
 
             this.form.Redraw();
         }
@@ -314,6 +313,7 @@ namespace GameOfLife
             if (!this.run)
             {
                 this.run = true;
+                this.form.pbProgress.Visible = true;                
                 rbt.Text = "Stop";
                 // create timer if needed
                 if (this.timer == null)
@@ -326,9 +326,7 @@ namespace GameOfLife
             }
             else
             {
-                rbt.Text = "Start";
-                this.run = false;
-                this.timer.Stop();
+                StopUpdate();
             }
         }
         #endregion // OnRunGOLClick
@@ -345,28 +343,40 @@ namespace GameOfLife
             // check whether we somewhere stopped the timer
             if (!this.run || this.needsInit)
             {
-                this.timer.Stop();
+                StopUpdate();
                 return;
             }
-
+            
             // check how much time elapsed
             TimeSpan currentTime = stopWatch.Elapsed;
             TimeSpan elapsedTime = currentTime - lastTime;
             if (elapsedTime > TimeSpan.FromSeconds(this.speed))
             {
                 lastTime = currentTime;
-                this.gol.Update(1);
+                this.gol.Update((int)this.form.nGenerations.Value);
                 this.form.Redraw();
             }
             // check if we reached a non-existence
             if (Statics.EnvirEmpty(this.gol))
             {
-                this.form.btRunGOL.Text = "Start";
-                this.timer.Stop();
-                this.run = false;
+                StopUpdate();
             }
         }
         #endregion // TimerTick
+
+        #region StopUpdate
+        /// <summary>
+        /// Stops update routine and sets appropriate
+        /// variables
+        /// </summary>
+        private void StopUpdate()
+        {
+            this.form.btRunGOL.Text = "Start";
+            this.timer.Stop();
+            this.form.pbProgress.Visible = false;
+            this.run = false;
+        } 
+        #endregion // StopUpdate
 
         #region OnSizeChanged
         private void OnSizeChanged(object sender, EventArgs e)
@@ -428,7 +438,7 @@ namespace GameOfLife
         /// <param name="e"></param>
         private void OnUpdateClick(object sender, EventArgs e)
         {
-            this.gol.Update(1);
+            this.gol.Update((int)this.form.nGenerations.Value);
             this.form.Redraw();
         }
         #endregion // OnUpdateClick

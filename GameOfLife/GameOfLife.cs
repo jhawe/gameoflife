@@ -165,9 +165,14 @@ namespace GameOfLife
         /// <param name="yn">Y position of field</param>
         internal void ToggleField(int xn, int yn)
         {
-            if (xn >= 0 && xn < this.Size && yn >= 0 && yn < this.Size)
+            if (xn >= 0 && xn < this.size && yn >= 0 && yn < this.size)
             {
                 this.envir[xn, yn] = !this.envir[xn, yn];
+                // update profile
+                if (this.envir[xn, yn])
+                {
+                    this.profile[xn, yn]++;
+                }
             }
         }
         #endregion // ToggleField
