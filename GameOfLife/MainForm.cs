@@ -50,6 +50,9 @@ namespace GameOfLife
             // flag whether to use random colors
             bool random = this.controller.UseRandomColor;
 
+            // show only the profile
+            bool showProfile = this.controller.ShowProfile;
+
             // field color 
             Color fc = this.controller.FieldColor;
 
@@ -77,45 +80,60 @@ namespace GameOfLife
             {
                 for (int j = 0; j < m.Size; j++)
                 {
-                    bool v = m.Envir[i, j];
                     Brush b;
-                    if (v)
+                    if (showProfile)
                     {
-                        Color c = fc;
-                        // if we use fancy/gradient coloring, use color depending on 
-                        // number of neighbouring living fields
-                        if (fancy)
+                        if (m.Profile[i, j] > 0)
                         {
-                            int[] n = m.GetNeighbourhood(m.Envir, i, j);
-                            int sum = 0;
-                            for (int z = 0; z < n.Length; z++) { sum += n[z]; }
-                            c = ControlPaint.Light(fc, 1 - (sum * 1.0f) / n.Length);
-
+                            int v = Math.Min(m.Profile[i, j], 255);
+                            b = new SolidBrush(Color.FromArgb(v, 255 - v, 0));
                         }
-                        // supercedes fancy/gradient coloring
-                        if (random)
+                        else
                         {
-                            if (this.controller.StaticRandomColors)
-                            {
-                                c = this.controller.RandomFieldColors[i, j];
-                            }
-                            else
-                            {
-                                // create a random color
-                                c = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
-
-                            }
+                            b = new SolidBrush(bgCol);
                         }
-                        b = new SolidBrush(c);
                     }
                     else
                     {
-                        b = new SolidBrush(bgCol);
+                        bool v = m.Envir[i, j];
+                        if (v)
+                        {
+                            Color c = fc;
+                            // if we use fancy/gradient coloring, use color depending on 
+                            // number of neighbouring living fields
+                            if (fancy)
+                            {
+                                int[] n = m.GetNeighbourhood(m.Envir, i, j);
+                                int sum = 0;
+                                for (int z = 0; z < n.Length; z++) { sum += n[z]; }
+                                c = ControlPaint.Light(fc, 1 - (sum * 1.0f) / n.Length);
+
+                            }
+                            // supercedes fancy/gradient coloring
+                            if (random)
+                            {
+                                if (this.controller.StaticRandomColors)
+                                {
+                                    c = this.controller.RandomFieldColors[i, j];
+                                }
+                                else
+                                {
+                                    // create a random color
+                                    c = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+
+                                }
+                            }
+                            b = new SolidBrush(c);
+                        }
+                        else
+                        {
+                            b = new SolidBrush(bgCol);
+                        }
                     }
+
                     // draw the actual field
                     g.FillRectangle(b, new Rectangle(i * sizeX, j * sizeY, sizeX, sizeY));
                 }
-
             }
             // draw the buffer to the display
             this.display.CreateGraphics().DrawImage(bm, new Point(0, 0));

@@ -14,6 +14,7 @@ namespace GameOfLife
         /// </summary>
         private bool[,] envir; // the current 'living environment'
         private bool[,] init; // always holds the initial field
+        private int[,] profile; // holds the profile, i.e. how often a cell was visited
         private int size;
         private const int ENVIR_SIZE = 6;
         private int generation = 1;
@@ -43,10 +44,28 @@ namespace GameOfLife
             {
                 RandomInit(size);
             }
+            UpdateProfile(this.envir);
         }
         #endregion // Constructor
 
         #region Properties
+
+        #region Profile
+        /// <summary>
+        /// Gets the count profile for the current GOL instance
+        /// </summary>
+        internal int[,] Profile
+        {
+            get
+            {
+                if(this.profile == null)
+                {
+                    this.profile = new int[this.size, this.size];
+                }
+                return this.profile;
+            }
+        }
+        #endregion // Profile
 
         #region Generation
         /// <summary>
@@ -106,12 +125,36 @@ namespace GameOfLife
             {
                 this.infinite = value;
             }
-        } 
+        }
         #endregion // Infinite
 
         #endregion // Properties
 
         #region Methods
+
+        #region UpdateProfile
+        /// <summary>
+        /// UPdates the games count profile for each cell
+        /// </summary>
+        /// <param name="envir"></param>
+        private void UpdateProfile(bool[,] envir)
+        {
+            if (this.profile == null)
+            {
+                this.profile = new int[this.size, this.size];
+            }
+            for (int i = 0; i < this.size; i++)
+            {
+                for (int j = 0; j < this.size; j++)
+                {
+                    if (envir[i, j])
+                    {
+                        this.profile[i, j]++;
+                    }
+                }
+            }
+        } 
+        #endregion // UpdateProfile
 
         #region ToggleField
         /// <summary>
@@ -139,6 +182,7 @@ namespace GameOfLife
         {
             this.generation = 1;
             bool[,] init = new bool[size, size];
+            this.profile = new int[size, size];
 
             // we set three living cells next to each other
             // in one line
@@ -148,6 +192,7 @@ namespace GameOfLife
             init[half + 1, half] = true;
             this.envir = (bool[,])init.Clone();
             this.init = init;
+            UpdateProfile(this.init);
         }
         #endregion // BlinkerInit
 
@@ -160,6 +205,7 @@ namespace GameOfLife
         {
             this.generation = 1;
             bool[,] init = new bool[size, size];
+            this.profile = new int[size, size];
 
             var r = new Random();
             for (int i = 0; i < size; i++)
@@ -169,6 +215,7 @@ namespace GameOfLife
                     if (r.NextDouble() < prob)
                     {
                         init[i, j] = true;
+                        this.profile[i, j]++;
                     }
                 }
             }
@@ -186,7 +233,7 @@ namespace GameOfLife
         {
             this.generation = 1;
             bool[,] init = new bool[size, size];
-
+            this.profile = new int[size, size];
             // we set three living cells next to each other
             // in one line
             int half = size / 2;
@@ -200,6 +247,7 @@ namespace GameOfLife
 
             this.envir = (bool[,])init.Clone();
             this.init = init;
+            UpdateProfile(this.init);
         }
         #endregion // GleiterInit
 
@@ -215,6 +263,7 @@ namespace GameOfLife
 
             this.generation = 1;
             bool[,] init = new bool[size, size];
+            this.profile = new int[size, size];
 
             // we set three living cells next to each other
             // in one vertical line
@@ -229,6 +278,7 @@ namespace GameOfLife
 
             this.envir = (bool[,])init.Clone();
             this.init = init;
+            UpdateProfile(this.init);
         }
         #endregion // PentominoInit
 
@@ -254,6 +304,9 @@ namespace GameOfLife
                 // apply our update                 
                 ApplyRules(envir, out copy);
                 envir = (bool[,])copy.Clone();
+
+                // update the count profile
+                UpdateProfile(envir);
             }
             // set the new environment
             this.envir = copy;

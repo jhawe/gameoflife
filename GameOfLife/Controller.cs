@@ -77,6 +77,7 @@ namespace GameOfLife
             this.form.cbInfinityEnvir.CheckedChanged += OnInfiniteEnvironmentChanged;
             this.form.btBGColor.Click += OnChooseBGColorClick;
             this.form.cbRandomStaticColors.CheckedChanged += OnRandomStaticColorsCheckanged;
+            this.form.cbShowProfile.CheckedChanged += OnShowProfileCheckedChanged;
             // the special init buttons
             this.form.btBlinker.Click += OnInitBlinker;
             this.form.btGleiter.Click += OnInitGleiter;
@@ -159,6 +160,19 @@ namespace GameOfLife
             }
         }
         #endregion // StaticRandomColors
+
+        #region ShowProfile
+        /// <summary>
+        /// Gets a flag whether to show the profile
+        /// </summary>
+        internal bool ShowProfile
+        {
+            get
+            {
+                return this.form.cbShowProfile.Checked;
+            }
+        }
+        #endregion // ShowProfile
 
         #region BGColor
         /// <summary>
@@ -257,6 +271,20 @@ namespace GameOfLife
 
         private void OnRandomStaticColorsCheckanged(object sender, EventArgs e)
         {
+            this.form.Redraw();
+        }
+
+
+        private void OnShowProfileCheckedChanged(object sender, EventArgs e)
+        {
+            bool v = this.form.cbShowProfile.Checked;
+            // enable/disable controls
+            this.form.cbFlickerBG.Enabled = !v;            
+            this.form.cbRandomColoring.Enabled = !v;
+            this.form.cbDrawFancy.Enabled = !v;
+            this.form.btChooseColor.Enabled = !v;
+            this.form.btBGColor.Enabled = !v;
+
             this.form.Redraw();
         }
 
@@ -453,7 +481,7 @@ namespace GameOfLife
             // reset random colors if necessary
             if (this.needsInit)
             {
-                this.fieldColors = null;
+                this.fieldColors = null;                
             }
         }
         #endregion // SetNeedsInit
