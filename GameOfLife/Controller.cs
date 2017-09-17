@@ -29,6 +29,7 @@ namespace GameOfLife
         private bool needsInit;
         private ColorDialog colorDialog;
         private ColorDialog bgColorDialog;
+        private Color[,] fieldColors;
         #endregion // Class Member
 
         #region Constructor
@@ -40,6 +41,8 @@ namespace GameOfLife
         {
             // member init
             this.form = form;
+            this.fieldColors = null;
+
             SetNeedsInit(true);
             // init color dialog
             this.colorDialog = new ColorDialog();
@@ -73,6 +76,7 @@ namespace GameOfLife
             this.form.cbRandomColoring.CheckedChanged += OnUseRandomColorChanged;
             this.form.cbInfinityEnvir.CheckedChanged += OnInfiniteEnvironmentChanged;
             this.form.btBGColor.Click += OnChooseBGColorClick;
+            this.form.cbRandomStaticColors.CheckedChanged += OnRandomStaticColorsCheckanged;
             // the special init buttons
             this.form.btBlinker.Click += OnInitBlinker;
             this.form.btGleiter.Click += OnInitGleiter;
@@ -82,6 +86,39 @@ namespace GameOfLife
         #endregion // Constructor
 
         #region Properties
+
+        #region RandomFieldColors
+        /// <summary>
+        /// Gets a matrix of colors corresponding
+        /// to the cells available in the environment
+        /// colors are set randomly for each field
+        /// </summary>
+        internal Color[,] RandomFieldColors
+        {
+            get
+            {
+                if (this.fieldColors == null)
+                {
+                    // check whether to even use static random field
+                    // colors
+                    if (UseRandomColor && StaticRandomColors)
+                    {
+                        this.fieldColors = new Color[this.golSize, this.golSize];
+                        Random r = new Random();
+                        for (int i = 0; i < this.golSize; i++)
+                        {
+                            for (int j = 0; j < this.golSize; j++)
+                            {
+                                Color c = Color.FromArgb(r.Next(256), r.Next(256), r.Next(256));
+                                this.fieldColors[i, j] = c;
+                            }
+                        }
+                    }
+                }
+                return this.fieldColors;
+            }
+        }
+        #endregion // RandomFieldColors
 
         #region DrawFancy
         /// <summary>
@@ -109,6 +146,19 @@ namespace GameOfLife
             }
         }
         #endregion //FlickerBG
+
+        #region StaticRandomColors
+        /// <summary>
+        /// Gets a flag whether to use static random colors
+        /// </summary>
+        internal bool StaticRandomColors
+        {
+            get
+            {
+                return this.form.cbRandomStaticColors.Checked;
+            }
+        }
+        #endregion // StaticRandomColors
 
         #region BGColor
         /// <summary>
@@ -205,6 +255,11 @@ namespace GameOfLife
         }
         #endregion // OnChooseBGColorClick
 
+        private void OnRandomStaticColorsCheckanged(object sender, EventArgs e)
+        {
+            this.form.Redraw();
+        }
+
         private void OnUseRandomColorChanged(object sender, EventArgs e)
         {
             bool rc = this.form.cbRandomColoring.Checked;
@@ -212,6 +267,7 @@ namespace GameOfLife
             this.form.cbDrawFancy.Enabled = !rc;
             this.form.btChooseColor.Enabled = !rc;
             this.form.plColor.Enabled = !rc;
+            this.form.cbRandomStaticColors.Enabled = rc;
 
             this.form.Redraw();
         }
@@ -244,7 +300,7 @@ namespace GameOfLife
                 this.run = false;
                 this.timer.Stop();
             }
-        } 
+        }
         #endregion // OnRunGOLClick
 
         #region TimerTick
@@ -279,7 +335,7 @@ namespace GameOfLife
                 this.timer.Stop();
                 this.run = false;
             }
-        } 
+        }
         #endregion // TimerTick
 
         #region OnSizeChanged
@@ -294,7 +350,7 @@ namespace GameOfLife
             SetNeedsInit(true);
         }
         #endregion // OnSizeChanged
-        
+
         #region OnInfiniteEnvironmentChanged
         /// <summary>
         /// Handles checked change event o finfinitie envir toggle
@@ -307,7 +363,7 @@ namespace GameOfLife
             this.form.Redraw();
         }
         #endregion // OnInfiniteEnvironmentChanged
-        
+
         #region OnDisplayMouseClick
         /// <summary>
         /// Handles click on the display and toggles the corresponding field
@@ -393,7 +449,13 @@ namespace GameOfLife
             // disable/enable start and next button
             this.form.btRunGOL.Enabled = !this.needsInit;
             this.form.btNext.Enabled = !this.needsInit;
-        } 
+
+            // reset random colors if necessary
+            if (this.needsInit)
+            {
+                this.fieldColors = null;
+            }
+        }
         #endregion // SetNeedsInit
 
         #endregion // Methods

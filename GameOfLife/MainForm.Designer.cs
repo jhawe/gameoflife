@@ -55,6 +55,7 @@
             this.cbInfinityEnvir = new System.Windows.Forms.CheckBox();
             this.btBGColor = new System.Windows.Forms.Button();
             this.plBGColor = new System.Windows.Forms.Panel();
+            this.cbRandomStaticColors = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -161,6 +162,7 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.cbRandomStaticColors);
             this.groupBox3.Controls.Add(this.plBGColor);
             this.groupBox3.Controls.Add(this.btBGColor);
             this.groupBox3.Controls.Add(this.cbInfinityEnvir);
@@ -393,7 +395,7 @@
             // 
             // btBGColor
             // 
-            this.btBGColor.Location = new System.Drawing.Point(135, 37);
+            this.btBGColor.Location = new System.Drawing.Point(155, 36);
             this.btBGColor.Name = "btBGColor";
             this.btBGColor.Size = new System.Drawing.Size(70, 23);
             this.btBGColor.TabIndex = 15;
@@ -402,10 +404,21 @@
             // 
             // plBGColor
             // 
-            this.plBGColor.Location = new System.Drawing.Point(211, 38);
+            this.plBGColor.Location = new System.Drawing.Point(230, 38);
             this.plBGColor.Name = "plBGColor";
             this.plBGColor.Size = new System.Drawing.Size(22, 21);
             this.plBGColor.TabIndex = 12;
+            // 
+            // cbRandomStaticColors
+            // 
+            this.cbRandomStaticColors.AutoSize = true;
+            this.cbRandomStaticColors.Enabled = false;
+            this.cbRandomStaticColors.Location = new System.Drawing.Point(155, 90);
+            this.cbRandomStaticColors.Name = "cbRandomStaticColors";
+            this.cbRandomStaticColors.Size = new System.Drawing.Size(79, 17);
+            this.cbRandomStaticColors.TabIndex = 16;
+            this.cbRandomStaticColors.Text = "fixed colors";
+            this.cbRandomStaticColors.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -464,6 +477,7 @@
         internal System.Windows.Forms.CheckBox cbInfinityEnvir;
         internal System.Windows.Forms.Panel plBGColor;
         internal System.Windows.Forms.Button btBGColor;
+        internal System.Windows.Forms.CheckBox cbRandomStaticColors;
     }
 }
 

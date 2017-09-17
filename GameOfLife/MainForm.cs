@@ -95,8 +95,16 @@ namespace GameOfLife
                         // supercedes fancy/gradient coloring
                         if (random)
                         {
-                            // create a random color
-                            c = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+                            if (this.controller.StaticRandomColors)
+                            {
+                                c = this.controller.RandomFieldColors[i, j];
+                            }
+                            else
+                            {
+                                // create a random color
+                                c = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+
+                            }
                         }
                         b = new SolidBrush(c);
                     }
