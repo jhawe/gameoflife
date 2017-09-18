@@ -8,6 +8,23 @@ namespace GameOfLife
 {
     class GameOfLife
     {
+        #region Enums
+
+        #region InitType
+        /// <summary>
+        /// Define the possible types of init
+        /// </summary>
+        public enum InitType
+        {
+            Random,
+            Blinker,
+            Gleiter,
+            Pentamino
+        }
+        #endregion // InitType 
+
+        #endregion // Enums
+
         #region Class Member
         /// <summary>
         /// class member definitions
@@ -15,7 +32,8 @@ namespace GameOfLife
         private bool[,] envir; // the current 'living environment'
         private bool[,] init; // always holds the initial field
         private int[,] profile; // holds the profile, i.e. how often a cell was visited
-        private int size;
+        private int sizeX;
+        private int sizeY;
         private const int ENVIR_SIZE = 6;
         private int generation = 1;
         private bool infinite = true;
@@ -25,27 +43,10 @@ namespace GameOfLife
         /// <summary>
         /// Constructor
         /// </summary>
-        public GameOfLife(int size = ENVIR_SIZE) : this(null, size)
+        public GameOfLife()
         {
-            // member init
-        }
-        public GameOfLife(bool[,] init, int size = ENVIR_SIZE)
-        {
-            if (size < 5)
-            {
-                throw new Exception("Size has to be >= 5!");
-            }
 
-            // member init
-            this.envir = init;
-            this.init = init;
-            this.size = size;
-            if (this.envir == null)
-            {
-                RandomInit(size);
-            }
-            UpdateProfile(this.envir);
-        }
+        }        
         #endregion // Constructor
 
         #region Properties
@@ -60,7 +61,7 @@ namespace GameOfLife
             {
                 if(this.profile == null)
                 {
-                    this.profile = new int[this.size, this.size];
+                    this.profile = new int[this.sizeX, this.sizeY];
                 }
                 return this.profile;
             }
@@ -93,22 +94,39 @@ namespace GameOfLife
         }
         #endregion // Envir
 
-        #region Size
+        #region SizeX
         /// <summary>
         /// Size of the current GOL instance
         /// </summary>
-        internal int Size
+        internal int SizeX
         {
             get
             {
-                return this.size;
+                return this.sizeX;
             }
             set
             {
-                this.size = value;
+                this.sizeX = value;
             }
         }
-        #endregion // Size
+        #endregion // SizeX
+
+        #region SizeY
+        /// <summary>
+        /// Size of the current GOL instance
+        /// </summary>
+        internal int SizeY
+        {
+            get
+            {
+                return this.sizeY;
+            }
+            set
+            {
+                this.sizeY = value;
+            }
+        }
+        #endregion // SizeY
 
         #region Infinite
         /// <summary>
@@ -141,11 +159,11 @@ namespace GameOfLife
         {
             if (this.profile == null)
             {
-                this.profile = new int[this.size, this.size];
+                this.profile = new int[this.sizeX, this.sizeY];
             }
-            for (int i = 0; i < this.size; i++)
+            for (int i = 0; i < this.sizeX; i++)
             {
-                for (int j = 0; j < this.size; j++)
+                for (int j = 0; j < this.sizeY; j++)
                 {
                     if (envir[i, j])
                     {
@@ -165,7 +183,7 @@ namespace GameOfLife
         /// <param name="yn">Y position of field</param>
         internal void ToggleField(int xn, int yn)
         {
-            if (xn >= 0 && xn < this.size && yn >= 0 && yn < this.size)
+            if (xn >= 0 && xn < this.sizeX && yn >= 0 && yn < this.sizeY)
             {
                 this.envir[xn, yn] = !this.envir[xn, yn];
                 // update profile
@@ -177,27 +195,59 @@ namespace GameOfLife
         }
         #endregion // ToggleField
 
+        #region Init
+        internal void Init(int sizeX, InitType it, int sizeY=-1, float prob = 0.3f)
+        {
+            // check whether we want a square environment
+            if(sizeY == -1)
+            {
+                sizeY = sizeX;
+            }
+
+            this.sizeX = sizeX;
+            this.sizeY = sizeY;
+            this.generation = 1;
+            bool[,] init = new bool[sizeX, sizeY];
+            this.profile = new int[sizeX, sizeY];
+
+            switch (it)
+            {
+                case InitType.Random:
+                    RandomInit(init, prob);
+                    break;
+                case InitType.Pentamino:
+                    PentominoInit(init);
+                    break;
+                case InitType.Gleiter:
+                    GleiterInit(init);
+                    break;
+                case InitType.Blinker:
+                    BlinkerInit(init);
+                    break;
+                default:
+                    throw new Exception("Init type is not supported");
+            }
+
+            this.envir = (bool[,])init.Clone();
+            this.init = init;
+            UpdateProfile(this.init);            
+        }
+        #endregion // Init
+
         #region BlinkerInit
         /// <summary>
         /// Simple 'Blinker' init, placing three living cells
         /// right next to each other on init
         /// </summary>
         /// <param name="size">The size of the environment</param>
-        internal void BlinkerInit(int size = ENVIR_SIZE)
+        private void BlinkerInit(bool[,] init)
         {
-            this.generation = 1;
-            bool[,] init = new bool[size, size];
-            this.profile = new int[size, size];
-
             // we set three living cells next to each other
             // in one line
-            int half = size / 2;
+            int half = Math.Min(this.sizeX, this.sizeY) / 2;
             init[half, half] = true;
             init[half - 1, half] = true;
-            init[half + 1, half] = true;
-            this.envir = (bool[,])init.Clone();
-            this.init = init;
-            UpdateProfile(this.init);
+            init[half + 1, half] = true;           
         }
         #endregion // BlinkerInit
 
@@ -206,16 +256,12 @@ namespace GameOfLife
         /// Performs random initialization of the environment
         /// </summary>
         /// <param name="size">The size of the environment</param>
-        internal void RandomInit(int size = ENVIR_SIZE, float prob = 0.3f)
-        {
-            this.generation = 1;
-            bool[,] init = new bool[size, size];
-            this.profile = new int[size, size];
-
+        private void RandomInit(bool[,] init, float prob = 0.3f)
+        {          
             var r = new Random();
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < this.sizeX; i++)
             {
-                for (int j = 0; j < size; j++)
+                for (int j = 0; j < this.sizeY; j++)
                 {
                     if (r.NextDouble() < prob)
                     {
@@ -234,14 +280,11 @@ namespace GameOfLife
         /// Initializes a "gleiter" in the middle of the environment
         /// </summary>
         /// <param name="size"></param>
-        internal void GleiterInit(int size = ENVIR_SIZE)
-        {
-            this.generation = 1;
-            bool[,] init = new bool[size, size];
-            this.profile = new int[size, size];
+        private void GleiterInit(bool[,] init)
+        {          
             // we set three living cells next to each other
             // in one line
-            int half = size / 2;
+            int half = Math.Min(this.sizeX, this.sizeY) / 2;
             init[half, half] = true;
             init[half - 1, half] = true;
             init[half + 1, half] = true;
@@ -249,10 +292,6 @@ namespace GameOfLife
             init[half + 1, half - 1] = true;
             // one on top left of the last one
             init[half, half - 2] = true;
-
-            this.envir = (bool[,])init.Clone();
-            this.init = init;
-            UpdateProfile(this.init);
         }
         #endregion // GleiterInit
 
@@ -261,18 +300,11 @@ namespace GameOfLife
         /// Initializes a "Pentomino" in the middle of the environment
         /// </summary>
         /// <param name="size"></param>
-        internal void PentominoInit(int size = ENVIR_SIZE)
+        private void PentominoInit(bool[,] init)
         {
-            // ensure minimum size 
-            if (size < 10) throw new Exception("Envir size too small.");
-
-            this.generation = 1;
-            bool[,] init = new bool[size, size];
-            this.profile = new int[size, size];
-
             // we set three living cells next to each other
             // in one vertical line
-            int half = size / 2;
+            int half = Math.Min(this.sizeX, this.sizeY) / 2;
             init[half, half] = true;
             init[half, half - 1] = true;
             init[half, half + 1] = true;
@@ -280,10 +312,6 @@ namespace GameOfLife
             init[half - 1, half] = true;
             // one on top left of the last one
             init[half + 1, half - 1] = true;
-
-            this.envir = (bool[,])init.Clone();
-            this.init = init;
-            UpdateProfile(this.init);
         }
         #endregion // PentominoInit
 
@@ -299,7 +327,7 @@ namespace GameOfLife
         {
             // local var
             bool[,] envir = this.envir;
-            bool[,] copy = new bool[this.size, this.size];
+            bool[,] copy = new bool[this.sizeX, this.sizeY];
 
             // perform some updates...
             for (int i = 0; i < generations; i++)
@@ -330,9 +358,9 @@ namespace GameOfLife
             copy = (bool[,])envir.Clone();
 
             // iterate over all cells and apply the rules
-            for (int i = 0; i < this.size; i++)
+            for (int i = 0; i < this.sizeX; i++)
             {
-                for (int j = 0; j < this.size; j++)
+                for (int j = 0; j < this.sizeY; j++)
                 {
                     int[] neighbourhood = GetNeighbourhood(envir, i, j);
                     int sum = 0;
@@ -398,18 +426,19 @@ namespace GameOfLife
                     int nx = x + i;
                     int ny = y + j;
                     // check outside x/y coordinate
-                    int maxIdx = this.size - 1;
+                    int maxXIdx = this.sizeX - 1;
+                    int maxYIdx = this.sizeY - 1;
                     if (Infinite)
                     {
-                        if (nx < 0) nx = maxIdx;
-                        if (ny < 0) ny = maxIdx;
-                        if (nx > maxIdx) nx = 0;
-                        if (ny > maxIdx) ny = 0;
+                        if (nx < 0) nx = maxXIdx;
+                        if (ny < 0) ny = maxYIdx;
+                        if (nx > maxXIdx) nx = 0;
+                        if (ny > maxYIdx) ny = 0;
                     }
                     // in that case, the field is not infinite
                     // but the field would be outside the envir,
                     // so we dont count the current field
-                    if (nx < 0 || ny < 0 || nx > maxIdx || ny > maxIdx)
+                    if (nx < 0 || ny < 0 || nx > maxXIdx || ny > maxYIdx)
                     {
                         result[ridx] = 0;
                         continue;
@@ -440,9 +469,9 @@ namespace GameOfLife
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < this.size; i++)
+            for (int i = 0; i < this.sizeX; i++)
             {
-                for (int j = 0; j < this.size; j++)
+                for (int j = 0; j < this.sizeY; j++)
                 {
                     sb.Append(this.envir[i, j]);
                 }

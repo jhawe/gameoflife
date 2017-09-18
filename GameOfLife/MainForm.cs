@@ -75,9 +75,9 @@ namespace GameOfLife
             }
 
             // iterate over each field and draw it
-            for (int i = 0; i < m.Size; i++)
+            for (int i = 0; i < m.SizeX; i++)
             {
-                for (int j = 0; j < m.Size; j++)
+                for (int j = 0; j < m.SizeY; j++)
                 {
                     // get the brush
                     Brush b = GetBrush(m, i, j, fc, bgCol, fancy, random, showProfile);

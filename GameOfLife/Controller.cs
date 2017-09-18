@@ -58,7 +58,7 @@ namespace GameOfLife
 
             // get size
             this.golSize = (int)this.form.nSize.Value;
-            this.gol = new GameOfLife(this.golSize);
+            this.gol = new GameOfLife();
             this.form = form;
             this.form.model = this.gol;
             this.form.display.Cursor = Cursors.Hand;
@@ -385,8 +385,7 @@ namespace GameOfLife
             // TODO implement dedicated 'togglerun' method
             this.run = false;
             this.form.btRunGOL.Text = "Start";
-            this.golSize = (int)this.form.nSize.Value;
-            this.gol.Size = this.golSize;
+            this.golSize = (int)this.form.nSize.Value;            
             SetNeedsInit(true);
         }
         #endregion // OnSizeChanged
@@ -447,28 +446,28 @@ namespace GameOfLife
 
         private void OnInitPentomino(object sender, EventArgs e)
         {
-            this.gol.PentominoInit(this.golSize);
+            this.gol.Init(this.golSize, GameOfLife.InitType.Pentamino);
             SetNeedsInit(false);
             this.form.Redraw();
         }
 
         private void OnInitGleiter(object sender, EventArgs e)
         {
-            this.gol.GleiterInit(this.golSize);
+            this.gol.Init(this.golSize, GameOfLife.InitType.Gleiter);
             SetNeedsInit(false);
             this.form.Redraw();
         }
 
         private void OnInitBlinker(object sender, EventArgs e)
         {
-            this.gol.BlinkerInit(this.golSize);
+            this.gol.Init(this.golSize, GameOfLife.InitType.Blinker);
             SetNeedsInit(false);
             this.form.Redraw();
         }
 
         private void OnInitNewClick(object sender, EventArgs e)
         {
-            this.gol.RandomInit(this.golSize, (float)this.form.nProbability.Value);
+            this.gol.Init(this.golSize, GameOfLife.InitType.Random, -1, (float)this.form.nProbability.Value);
             SetNeedsInit(false);
             this.form.Redraw();
         }

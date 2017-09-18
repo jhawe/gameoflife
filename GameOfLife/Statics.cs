@@ -20,8 +20,8 @@ namespace GameOfLife
         {
             // get size of individual boxes, make it square always
             float reference = Math.Min(display.Width, display.Height);
-            sizeX = (int)Math.Floor(reference / gol.Size);
-            sizeY = sizeX;
+            sizeX = (int)Math.Floor(reference / gol.SizeX);
+            sizeY = (int)Math.Floor(reference / gol.SizeY);
         }
 
         /// <summary>
@@ -32,9 +32,9 @@ namespace GameOfLife
         internal static bool EnvirEmpty(GameOfLife gol)
         {
             bool[,] envir = gol.Envir;
-            for (int i = 0; i < gol.Size; i++)
+            for (int i = 0; i < gol.SizeX; i++)
             {
-                for (int j = 0; j < gol.Size; j++)
+                for (int j = 0; j < gol.SizeY; j++)
                 {
                     if (envir[i, j])
                     {
