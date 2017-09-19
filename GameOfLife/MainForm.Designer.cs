@@ -35,6 +35,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btRandomInit = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.pbProgress = new System.Windows.Forms.ProgressBar();
+            this.cbShowProfile = new System.Windows.Forms.CheckBox();
             this.cbRandomStaticColors = new System.Windows.Forms.CheckBox();
             this.plBGColor = new System.Windows.Forms.Panel();
             this.btBGColor = new System.Windows.Forms.Button();
@@ -51,15 +53,14 @@
             this.btGleiter = new System.Windows.Forms.Button();
             this.btBlinker = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.nGenerations = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
             this.nSpeed = new System.Windows.Forms.NumericUpDown();
-            this.nSize = new System.Windows.Forms.NumericUpDown();
+            this.nSizeY = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.display = new System.Windows.Forms.PictureBox();
-            this.cbShowProfile = new System.Windows.Forms.CheckBox();
-            this.nGenerations = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pbProgress = new System.Windows.Forms.ProgressBar();
+            this.nSizeX = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -69,10 +70,11 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nSize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nGenerations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSizeY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSizeX)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -186,6 +188,26 @@
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Controls";
+            // 
+            // pbProgress
+            // 
+            this.pbProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbProgress.Location = new System.Drawing.Point(203, 178);
+            this.pbProgress.Name = "pbProgress";
+            this.pbProgress.Size = new System.Drawing.Size(75, 12);
+            this.pbProgress.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.pbProgress.TabIndex = 15;
+            this.pbProgress.Visible = false;
+            // 
+            // cbShowProfile
+            // 
+            this.cbShowProfile.AutoSize = true;
+            this.cbShowProfile.Location = new System.Drawing.Point(6, 137);
+            this.cbShowProfile.Name = "cbShowProfile";
+            this.cbShowProfile.Size = new System.Drawing.Size(84, 17);
+            this.cbShowProfile.TabIndex = 17;
+            this.cbShowProfile.Text = "Show profile";
+            this.cbShowProfile.UseVisualStyleBackColor = true;
             // 
             // cbRandomStaticColors
             // 
@@ -337,10 +359,11 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.nSizeX);
             this.groupBox1.Controls.Add(this.nGenerations);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.nSpeed);
-            this.groupBox1.Controls.Add(this.nSize);
+            this.groupBox1.Controls.Add(this.nSizeY);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -349,95 +372,6 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Properties";
-            // 
-            // nSpeed
-            // 
-            this.nSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nSpeed.DecimalPlaces = 2;
-            this.nSpeed.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            131072});
-            this.nSpeed.Location = new System.Drawing.Point(219, 46);
-            this.nSpeed.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.nSpeed.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            131072});
-            this.nSpeed.Name = "nSpeed";
-            this.nSpeed.Size = new System.Drawing.Size(57, 20);
-            this.nSpeed.TabIndex = 9;
-            this.nSpeed.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            131072});
-            // 
-            // nSize
-            // 
-            this.nSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nSize.Location = new System.Drawing.Point(219, 20);
-            this.nSize.Maximum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.nSize.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.nSize.Name = "nSize";
-            this.nSize.Size = new System.Drawing.Size(57, 20);
-            this.nSize.TabIndex = 8;
-            this.nSize.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(116, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Update interval (in sec)";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Size";
-            // 
-            // display
-            // 
-            this.display.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.display.Location = new System.Drawing.Point(0, 0);
-            this.display.Name = "display";
-            this.display.Size = new System.Drawing.Size(589, 541);
-            this.display.TabIndex = 0;
-            this.display.TabStop = false;
-            // 
-            // cbShowProfile
-            // 
-            this.cbShowProfile.AutoSize = true;
-            this.cbShowProfile.Location = new System.Drawing.Point(6, 137);
-            this.cbShowProfile.Name = "cbShowProfile";
-            this.cbShowProfile.Size = new System.Drawing.Size(84, 17);
-            this.cbShowProfile.TabIndex = 17;
-            this.cbShowProfile.Text = "Show profile";
-            this.cbShowProfile.UseVisualStyleBackColor = true;
             // 
             // nGenerations
             // 
@@ -471,15 +405,107 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Generations per update";
             // 
-            // pbProgress
+            // nSpeed
             // 
-            this.pbProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbProgress.Location = new System.Drawing.Point(203, 178);
-            this.pbProgress.Name = "pbProgress";
-            this.pbProgress.Size = new System.Drawing.Size(75, 12);
-            this.pbProgress.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.pbProgress.TabIndex = 15;
-            this.pbProgress.Visible = false;
+            this.nSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nSpeed.DecimalPlaces = 2;
+            this.nSpeed.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.nSpeed.Location = new System.Drawing.Point(219, 46);
+            this.nSpeed.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.nSpeed.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.nSpeed.Name = "nSpeed";
+            this.nSpeed.Size = new System.Drawing.Size(57, 20);
+            this.nSpeed.TabIndex = 9;
+            this.nSpeed.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            // 
+            // nSizeY
+            // 
+            this.nSizeY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nSizeY.Location = new System.Drawing.Point(219, 20);
+            this.nSizeY.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.nSizeY.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nSizeY.Name = "nSizeY";
+            this.nSizeY.Size = new System.Drawing.Size(57, 20);
+            this.nSizeY.TabIndex = 8;
+            this.nSizeY.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(116, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Update interval (in sec)";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Size (x / y)";
+            // 
+            // display
+            // 
+            this.display.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.display.Location = new System.Drawing.Point(0, 0);
+            this.display.Name = "display";
+            this.display.Size = new System.Drawing.Size(589, 541);
+            this.display.TabIndex = 0;
+            this.display.TabStop = false;
+            // 
+            // nSizeX
+            // 
+            this.nSizeX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nSizeX.Location = new System.Drawing.Point(152, 20);
+            this.nSizeX.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.nSizeX.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nSizeX.Name = "nSizeX";
+            this.nSizeX.Size = new System.Drawing.Size(57, 20);
+            this.nSizeX.TabIndex = 12;
+            this.nSizeX.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // MainForm
             // 
@@ -502,10 +528,11 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nSize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.display)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nGenerations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSizeY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.display)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSizeX)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -524,7 +551,7 @@
         internal System.Windows.Forms.Button btRunGOL;
         private System.Windows.Forms.GroupBox groupBox3;
         internal System.Windows.Forms.NumericUpDown nSpeed;
-        internal System.Windows.Forms.NumericUpDown nSize;
+        internal System.Windows.Forms.NumericUpDown nSizeY;
         private System.Windows.Forms.GroupBox groupBox4;
         internal System.Windows.Forms.NumericUpDown nProbability;
         private System.Windows.Forms.Label label2;
@@ -544,6 +571,7 @@
         internal System.Windows.Forms.NumericUpDown nGenerations;
         private System.Windows.Forms.Label label4;
         internal System.Windows.Forms.ProgressBar pbProgress;
+        internal System.Windows.Forms.NumericUpDown nSizeX;
     }
 }
 

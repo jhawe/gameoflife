@@ -17,7 +17,8 @@ namespace GameOfLife
         /// </summary>
         GameOfLife gol;
         const int GOL_MIN_SIZE = 5;
-        int golSize;
+        int golSizeX;
+        int golSizeY;
         MainForm form;
         private bool run;
         private Stopwatch stopWatch = Stopwatch.StartNew();
@@ -45,7 +46,6 @@ namespace GameOfLife
             this.form = form;
             this.fieldColors = null;
 
-            SetNeedsInit(true);
             // init color dialog
             this.colorDialog = new ColorDialog();
             this.colorDialog.Color = Color.DarkGreen;
@@ -57,17 +57,20 @@ namespace GameOfLife
             this.form.plBGColor.BackColor = this.bgColorDialog.Color;
 
             // get size
-            this.golSize = (int)this.form.nSize.Value;
+            this.golSizeX = (int)this.form.nSizeX.Value;
+            this.golSizeY = (int)this.form.nSizeY.Value;
             this.gol = new GameOfLife();
             this.form = form;
             this.form.model = this.gol;
             this.form.display.Cursor = Cursors.Hand;
+            SetNeedsInit(true);
 
             // add some event handlers
             this.form.btNext.Click += OnUpdateClick;
             this.form.btRandomInit.Click += OnInitNewClick;
             this.form.display.MouseClick += OnDisplayMouseClick;
-            this.form.nSize.ValueChanged += OnSizeChanged;
+            this.form.nSizeY.ValueChanged += OnSizeChanged;
+            this.form.nSizeX.ValueChanged += OnSizeChanged;
             this.form.btRunGOL.Click += OnRunGOLClick;
             this.form.nSpeed.ValueChanged += OnSpeedChanged;
             this.form.Resize += OnFormResize;
@@ -106,11 +109,11 @@ namespace GameOfLife
                     // colors
                     if (UseRandomColor && StaticRandomColors)
                     {
-                        this.fieldColors = new Color[this.golSize, this.golSize];
+                        this.fieldColors = new Color[this.golSizeX, this.golSizeY];
                         Random r = new Random();
-                        for (int i = 0; i < this.golSize; i++)
+                        for (int i = 0; i < this.golSizeX; i++)
                         {
-                            for (int j = 0; j < this.golSize; j++)
+                            for (int j = 0; j < this.golSizeY; j++)
                             {
                                 Color c = Color.FromArgb(r.Next(256), r.Next(256), r.Next(256));
                                 this.fieldColors[i, j] = c;
@@ -281,10 +284,10 @@ namespace GameOfLife
         {
             bool v = this.form.cbShowProfile.Checked;
             // enable/disable controls
-            this.form.cbFlickerBG.Enabled = !v;            
+            this.form.cbFlickerBG.Enabled = !v;
             this.form.cbRandomColoring.Enabled = !v;
             this.form.cbDrawFancy.Enabled = !v;
-            this.form.btChooseColor.Enabled = !v;            
+            this.form.btChooseColor.Enabled = !v;
 
             this.form.Redraw();
         }
@@ -313,7 +316,7 @@ namespace GameOfLife
             if (!this.run)
             {
                 this.run = true;
-                this.form.pbProgress.Visible = true;                
+                this.form.pbProgress.Visible = true;
                 rbt.Text = "Stop";
                 // create timer if needed
                 if (this.timer == null)
@@ -346,7 +349,7 @@ namespace GameOfLife
                 StopUpdate();
                 return;
             }
-            
+
             // check how much time elapsed
             TimeSpan currentTime = stopWatch.Elapsed;
             TimeSpan elapsedTime = currentTime - lastTime;
@@ -375,18 +378,22 @@ namespace GameOfLife
             this.timer.Stop();
             this.form.pbProgress.Visible = false;
             this.run = false;
-        } 
+        }
         #endregion // StopUpdate
 
         #region OnSizeChanged
         private void OnSizeChanged(object sender, EventArgs e)
         {
-            // reset run variables
-            // TODO implement dedicated 'togglerun' method
-            this.run = false;
-            this.form.btRunGOL.Text = "Start";
-            this.golSize = (int)this.form.nSize.Value;            
             SetNeedsInit(true);
+            // reset run variables
+            if (sender.Equals(this.form.nSizeX))
+            {
+                this.golSizeX = (int)this.form.nSizeX.Value;
+            }
+            else if (sender.Equals(this.form.nSizeY))
+            {
+                this.golSizeY = (int)this.form.nSizeY.Value;
+            }
         }
         #endregion // OnSizeChanged
 
@@ -446,28 +453,28 @@ namespace GameOfLife
 
         private void OnInitPentomino(object sender, EventArgs e)
         {
-            this.gol.Init(this.golSize, GameOfLife.InitType.Pentamino);
+            this.gol.Init(this.golSizeX, GameOfLife.InitType.Pentamino, this.golSizeY);
             SetNeedsInit(false);
             this.form.Redraw();
         }
 
         private void OnInitGleiter(object sender, EventArgs e)
         {
-            this.gol.Init(this.golSize, GameOfLife.InitType.Gleiter);
+            this.gol.Init(this.golSizeX, GameOfLife.InitType.Gleiter, this.golSizeY);
             SetNeedsInit(false);
             this.form.Redraw();
         }
 
         private void OnInitBlinker(object sender, EventArgs e)
         {
-            this.gol.Init(this.golSize, GameOfLife.InitType.Blinker);
+            this.gol.Init(this.golSizeX, GameOfLife.InitType.Blinker, this.golSizeY);
             SetNeedsInit(false);
             this.form.Redraw();
         }
 
         private void OnInitNewClick(object sender, EventArgs e)
         {
-            this.gol.Init(this.golSize, GameOfLife.InitType.Random, -1, (float)this.form.nProbability.Value);
+            this.gol.Init(this.golSizeX, GameOfLife.InitType.Random, this.golSizeY, (float)this.form.nProbability.Value);
             SetNeedsInit(false);
             this.form.Redraw();
         }
@@ -484,7 +491,8 @@ namespace GameOfLife
         /// <param name="value"></param>
         private void SetNeedsInit(bool value)
         {
-            this.needsInit = value;
+            this.needsInit = value;         
+
             // disable/enable start and next button
             this.form.btRunGOL.Enabled = !this.needsInit;
             this.form.btNext.Enabled = !this.needsInit;
@@ -492,7 +500,9 @@ namespace GameOfLife
             // reset random colors if necessary
             if (this.needsInit)
             {
-                this.fieldColors = null;                
+                this.fieldColors = null;
+                this.run = false;
+                this.form.btRunGOL.Text = "Start";
             }
         }
         #endregion // SetNeedsInit
