@@ -48,11 +48,8 @@
             this.cbDrawFancy = new System.Windows.Forms.CheckBox();
             this.btRunGOL = new System.Windows.Forms.Button();
             this.btNext = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btPentomino = new System.Windows.Forms.Button();
-            this.btGleiter = new System.Windows.Forms.Button();
-            this.btBlinker = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.nSizeX = new System.Windows.Forms.NumericUpDown();
             this.nGenerations = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.nSpeed = new System.Windows.Forms.NumericUpDown();
@@ -60,7 +57,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.display = new System.Windows.Forms.PictureBox();
-            this.nSizeX = new System.Windows.Forms.NumericUpDown();
+            this.cbInitTypes = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -68,13 +65,12 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nProbability)).BeginInit();
             this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nSizeX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nGenerations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nSizeY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.display)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nSizeX)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -85,11 +81,13 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.pbProgress);
             this.splitContainer1.Panel1.Controls.Add(this.lGeneration);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox4);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.btRunGOL);
+            this.splitContainer1.Panel1.Controls.Add(this.btNext);
             this.splitContainer1.Panel1MinSize = 276;
             // 
             // splitContainer1.Panel2
@@ -112,15 +110,16 @@
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.cbInitTypes);
             this.groupBox4.Controls.Add(this.nProbability);
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Controls.Add(this.btRandomInit);
-            this.groupBox4.Location = new System.Drawing.Point(12, 134);
+            this.groupBox4.Location = new System.Drawing.Point(12, 140);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(282, 84);
             this.groupBox4.TabIndex = 12;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Random initialization";
+            this.groupBox4.Text = "Initialization";
             // 
             // nProbability
             // 
@@ -131,7 +130,7 @@
             0,
             0,
             65536});
-            this.nProbability.Location = new System.Drawing.Point(214, 23);
+            this.nProbability.Location = new System.Drawing.Point(131, 58);
             this.nProbability.Maximum = new decimal(new int[] {
             1,
             0,
@@ -149,7 +148,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 25);
+            this.label2.Location = new System.Drawing.Point(12, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 13);
             this.label2.TabIndex = 11;
@@ -158,7 +157,7 @@
             // btRandomInit
             // 
             this.btRandomInit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btRandomInit.Location = new System.Drawing.Point(198, 55);
+            this.btRandomInit.Location = new System.Drawing.Point(201, 21);
             this.btRandomInit.Name = "btRandomInit";
             this.btRandomInit.Size = new System.Drawing.Size(75, 23);
             this.btRandomInit.TabIndex = 5;
@@ -169,30 +168,26 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.pbProgress);
             this.groupBox3.Controls.Add(this.cbShowProfile);
             this.groupBox3.Controls.Add(this.cbRandomStaticColors);
             this.groupBox3.Controls.Add(this.plBGColor);
             this.groupBox3.Controls.Add(this.btBGColor);
-            this.groupBox3.Controls.Add(this.cbInfinityEnvir);
             this.groupBox3.Controls.Add(this.cbFlickerBG);
             this.groupBox3.Controls.Add(this.cbRandomColoring);
             this.groupBox3.Controls.Add(this.plColor);
             this.groupBox3.Controls.Add(this.btChooseColor);
             this.groupBox3.Controls.Add(this.cbDrawFancy);
-            this.groupBox3.Controls.Add(this.btRunGOL);
-            this.groupBox3.Controls.Add(this.btNext);
-            this.groupBox3.Location = new System.Drawing.Point(12, 304);
+            this.groupBox3.Location = new System.Drawing.Point(12, 230);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(284, 196);
+            this.groupBox3.Size = new System.Drawing.Size(284, 142);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Controls";
+            this.groupBox3.Text = "Visuals";
             // 
             // pbProgress
             // 
             this.pbProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbProgress.Location = new System.Drawing.Point(203, 178);
+            this.pbProgress.Location = new System.Drawing.Point(219, 407);
             this.pbProgress.Name = "pbProgress";
             this.pbProgress.Size = new System.Drawing.Size(75, 12);
             this.pbProgress.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
@@ -202,7 +197,7 @@
             // cbShowProfile
             // 
             this.cbShowProfile.AutoSize = true;
-            this.cbShowProfile.Location = new System.Drawing.Point(6, 137);
+            this.cbShowProfile.Location = new System.Drawing.Point(6, 119);
             this.cbShowProfile.Name = "cbShowProfile";
             this.cbShowProfile.Size = new System.Drawing.Size(84, 17);
             this.cbShowProfile.TabIndex = 17;
@@ -213,7 +208,7 @@
             // 
             this.cbRandomStaticColors.AutoSize = true;
             this.cbRandomStaticColors.Enabled = false;
-            this.cbRandomStaticColors.Location = new System.Drawing.Point(155, 90);
+            this.cbRandomStaticColors.Location = new System.Drawing.Point(155, 72);
             this.cbRandomStaticColors.Name = "cbRandomStaticColors";
             this.cbRandomStaticColors.Size = new System.Drawing.Size(79, 17);
             this.cbRandomStaticColors.TabIndex = 16;
@@ -222,14 +217,14 @@
             // 
             // plBGColor
             // 
-            this.plBGColor.Location = new System.Drawing.Point(230, 38);
+            this.plBGColor.Location = new System.Drawing.Point(230, 20);
             this.plBGColor.Name = "plBGColor";
             this.plBGColor.Size = new System.Drawing.Size(22, 21);
             this.plBGColor.TabIndex = 12;
             // 
             // btBGColor
             // 
-            this.btBGColor.Location = new System.Drawing.Point(155, 36);
+            this.btBGColor.Location = new System.Drawing.Point(155, 18);
             this.btBGColor.Name = "btBGColor";
             this.btBGColor.Size = new System.Drawing.Size(70, 23);
             this.btBGColor.TabIndex = 15;
@@ -241,7 +236,7 @@
             this.cbInfinityEnvir.AutoSize = true;
             this.cbInfinityEnvir.Checked = true;
             this.cbInfinityEnvir.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbInfinityEnvir.Location = new System.Drawing.Point(7, 17);
+            this.cbInfinityEnvir.Location = new System.Drawing.Point(9, 99);
             this.cbInfinityEnvir.Name = "cbInfinityEnvir";
             this.cbInfinityEnvir.Size = new System.Drawing.Size(118, 17);
             this.cbInfinityEnvir.TabIndex = 14;
@@ -251,7 +246,7 @@
             // cbFlickerBG
             // 
             this.cbFlickerBG.AutoSize = true;
-            this.cbFlickerBG.Location = new System.Drawing.Point(6, 114);
+            this.cbFlickerBG.Location = new System.Drawing.Point(6, 96);
             this.cbFlickerBG.Name = "cbFlickerBG";
             this.cbFlickerBG.Size = new System.Drawing.Size(117, 17);
             this.cbFlickerBG.TabIndex = 13;
@@ -261,7 +256,7 @@
             // cbRandomColoring
             // 
             this.cbRandomColoring.AutoSize = true;
-            this.cbRandomColoring.Location = new System.Drawing.Point(6, 90);
+            this.cbRandomColoring.Location = new System.Drawing.Point(6, 72);
             this.cbRandomColoring.Name = "cbRandomColoring";
             this.cbRandomColoring.Size = new System.Drawing.Size(143, 17);
             this.cbRandomColoring.TabIndex = 12;
@@ -270,14 +265,14 @@
             // 
             // plColor
             // 
-            this.plColor.Location = new System.Drawing.Point(91, 38);
+            this.plColor.Location = new System.Drawing.Point(91, 20);
             this.plColor.Name = "plColor";
             this.plColor.Size = new System.Drawing.Size(22, 21);
             this.plColor.TabIndex = 11;
             // 
             // btChooseColor
             // 
-            this.btChooseColor.Location = new System.Drawing.Point(6, 37);
+            this.btChooseColor.Location = new System.Drawing.Point(6, 19);
             this.btChooseColor.Name = "btChooseColor";
             this.btChooseColor.Size = new System.Drawing.Size(77, 23);
             this.btChooseColor.TabIndex = 10;
@@ -287,7 +282,7 @@
             // cbDrawFancy
             // 
             this.cbDrawFancy.AutoSize = true;
-            this.cbDrawFancy.Location = new System.Drawing.Point(6, 66);
+            this.cbDrawFancy.Location = new System.Drawing.Point(6, 48);
             this.cbDrawFancy.Name = "cbDrawFancy";
             this.cbDrawFancy.Size = new System.Drawing.Size(126, 17);
             this.cbDrawFancy.TabIndex = 9;
@@ -297,7 +292,7 @@
             // btRunGOL
             // 
             this.btRunGOL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btRunGOL.Location = new System.Drawing.Point(203, 154);
+            this.btRunGOL.Location = new System.Drawing.Point(219, 378);
             this.btRunGOL.Name = "btRunGOL";
             this.btRunGOL.Size = new System.Drawing.Size(75, 23);
             this.btRunGOL.TabIndex = 8;
@@ -307,53 +302,12 @@
             // btNext
             // 
             this.btNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btNext.Location = new System.Drawing.Point(136, 154);
+            this.btNext.Location = new System.Drawing.Point(152, 378);
             this.btNext.Name = "btNext";
             this.btNext.Size = new System.Drawing.Size(61, 23);
             this.btNext.TabIndex = 0;
             this.btNext.Text = "Next";
             this.btNext.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.btPentomino);
-            this.groupBox2.Controls.Add(this.btGleiter);
-            this.groupBox2.Controls.Add(this.btBlinker);
-            this.groupBox2.Location = new System.Drawing.Point(13, 231);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(283, 64);
-            this.groupBox2.TabIndex = 6;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Special inits";
-            // 
-            // btPentomino
-            // 
-            this.btPentomino.Location = new System.Drawing.Point(171, 20);
-            this.btPentomino.Name = "btPentomino";
-            this.btPentomino.Size = new System.Drawing.Size(75, 23);
-            this.btPentomino.TabIndex = 2;
-            this.btPentomino.Text = "Pentomino";
-            this.btPentomino.UseVisualStyleBackColor = true;
-            // 
-            // btGleiter
-            // 
-            this.btGleiter.Location = new System.Drawing.Point(89, 20);
-            this.btGleiter.Name = "btGleiter";
-            this.btGleiter.Size = new System.Drawing.Size(75, 23);
-            this.btGleiter.TabIndex = 1;
-            this.btGleiter.Text = "Gleiter";
-            this.btGleiter.UseVisualStyleBackColor = true;
-            // 
-            // btBlinker
-            // 
-            this.btBlinker.Location = new System.Drawing.Point(7, 20);
-            this.btBlinker.Name = "btBlinker";
-            this.btBlinker.Size = new System.Drawing.Size(75, 23);
-            this.btBlinker.TabIndex = 0;
-            this.btBlinker.Text = "Blinker";
-            this.btBlinker.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -364,14 +318,38 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.nSpeed);
             this.groupBox1.Controls.Add(this.nSizeY);
+            this.groupBox1.Controls.Add(this.cbInfinityEnvir);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(282, 116);
+            this.groupBox1.Size = new System.Drawing.Size(282, 122);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Properties";
+            // 
+            // nSizeX
+            // 
+            this.nSizeX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nSizeX.Location = new System.Drawing.Point(152, 20);
+            this.nSizeX.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.nSizeX.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nSizeX.Name = "nSizeX";
+            this.nSizeX.Size = new System.Drawing.Size(57, 20);
+            this.nSizeX.TabIndex = 12;
+            this.nSizeX.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // nGenerations
             // 
@@ -484,28 +462,15 @@
             this.display.TabIndex = 0;
             this.display.TabStop = false;
             // 
-            // nSizeX
+            // cbInitTypes
             // 
-            this.nSizeX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nSizeX.Location = new System.Drawing.Point(152, 20);
-            this.nSizeX.Maximum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.nSizeX.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.nSizeX.Name = "nSizeX";
-            this.nSizeX.Size = new System.Drawing.Size(57, 20);
-            this.nSizeX.TabIndex = 12;
-            this.nSizeX.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
+            this.cbInitTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbInitTypes.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.cbInitTypes.FormattingEnabled = true;
+            this.cbInitTypes.Location = new System.Drawing.Point(9, 23);
+            this.cbInitTypes.Name = "cbInitTypes";
+            this.cbInitTypes.Size = new System.Drawing.Size(181, 21);
+            this.cbInitTypes.TabIndex = 12;
             // 
             // MainForm
             // 
@@ -525,14 +490,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.nProbability)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nSizeX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nGenerations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nSizeY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.display)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nSizeX)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -545,8 +509,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.Button btNext;
         internal System.Windows.Forms.Button btRandomInit;
-        private System.Windows.Forms.GroupBox groupBox2;
-        internal System.Windows.Forms.Button btBlinker;
         private System.Windows.Forms.Label label3;
         internal System.Windows.Forms.Button btRunGOL;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -556,8 +518,6 @@
         internal System.Windows.Forms.NumericUpDown nProbability;
         private System.Windows.Forms.Label label2;
         internal System.Windows.Forms.Label lGeneration;
-        internal System.Windows.Forms.Button btGleiter;
-        internal System.Windows.Forms.Button btPentomino;
         internal System.Windows.Forms.CheckBox cbDrawFancy;
         internal System.Windows.Forms.Button btChooseColor;
         internal System.Windows.Forms.Panel plColor;
@@ -572,6 +532,7 @@
         private System.Windows.Forms.Label label4;
         internal System.Windows.Forms.ProgressBar pbProgress;
         internal System.Windows.Forms.NumericUpDown nSizeX;
+        internal System.Windows.Forms.ComboBox cbInitTypes;
     }
 }
 

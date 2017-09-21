@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static GameOfLife.GameOfLife;
 
 namespace GameOfLife
 {
@@ -67,15 +68,14 @@ namespace GameOfLife
 
             // add some event handlers
             this.form.btNext.Click += OnUpdateClick;
-            this.form.btRandomInit.Click += OnInitNewClick;
+            this.form.btRandomInit.Click += OnInit;
             this.form.display.MouseClick += OnDisplayMouseClick;
             this.form.nSizeY.ValueChanged += OnSizeChanged;
             this.form.nSizeX.ValueChanged += OnSizeChanged;
             this.form.btRunGOL.Click += OnRunGOLClick;
             this.form.nSpeed.ValueChanged += OnSpeedChanged;
-            this.form.Resize += OnFormResize;
-            this.form.SizeChanged += OnFormResize;
-            this.form.ResizeEnd += OnFormResize;
+            this.form.ResizeEnd += OnFormResizeEnd;
+            this.form.SizeChanged += OnFormResizeEnd;
             this.form.btChooseColor.Click += OnChooseColorClick;
             this.form.cbDrawFancy.CheckedChanged += OnUseFancyCheckChanged;
             this.form.cbRandomColoring.CheckedChanged += OnUseRandomColorChanged;
@@ -83,10 +83,7 @@ namespace GameOfLife
             this.form.btBGColor.Click += OnChooseBGColorClick;
             this.form.cbRandomStaticColors.CheckedChanged += OnRandomStaticColorsCheckanged;
             this.form.cbShowProfile.CheckedChanged += OnShowProfileCheckedChanged;
-            // the special init buttons
-            this.form.btBlinker.Click += OnInitBlinker;
-            this.form.btGleiter.Click += OnInitGleiter;
-            this.form.btPentomino.Click += OnInitPentomino;
+
             this.form.Redraw();
         }
         #endregion // Constructor
@@ -218,7 +215,6 @@ namespace GameOfLife
         }
         #endregion // UseRandomColor
 
-
         #endregion // Properties
 
         #region Methods
@@ -242,7 +238,7 @@ namespace GameOfLife
         }
         #endregion // OnChooseColorClick
 
-        private void OnFormResize(object sender, EventArgs e)
+        private void OnFormResizeEnd(object sender, EventArgs e)
         {
             this.form.Redraw();
         }
@@ -397,6 +393,26 @@ namespace GameOfLife
         }
         #endregion // OnSizeChanged
 
+
+        #region OnInit
+        /// <summary>
+        /// Inits the environment based on the currently selected
+        /// inittype
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnInit(object sender, EventArgs e)
+        {
+            var v = this.form.cbInitTypes.SelectedValue;
+            InitType it = InitType.Random;
+            Enum.TryParse<InitType>(v.ToString(), out it);
+
+            this.gol.Init(this.golSizeX, it, this.golSizeY, (float)this.form.nProbability.Value);
+            SetNeedsInit(false);
+            this.form.Redraw();
+        } 
+        #endregion // OnInit
+        
         #region OnInfiniteEnvironmentChanged
         /// <summary>
         /// Handles checked change event o finfinitie envir toggle
@@ -449,38 +465,6 @@ namespace GameOfLife
         }
         #endregion // OnUpdateClick
 
-        #region Init Methods
-
-        private void OnInitPentomino(object sender, EventArgs e)
-        {
-            this.gol.Init(this.golSizeX, GameOfLife.InitType.Pentamino, this.golSizeY);
-            SetNeedsInit(false);
-            this.form.Redraw();
-        }
-
-        private void OnInitGleiter(object sender, EventArgs e)
-        {
-            this.gol.Init(this.golSizeX, GameOfLife.InitType.Gleiter, this.golSizeY);
-            SetNeedsInit(false);
-            this.form.Redraw();
-        }
-
-        private void OnInitBlinker(object sender, EventArgs e)
-        {
-            this.gol.Init(this.golSizeX, GameOfLife.InitType.Blinker, this.golSizeY);
-            SetNeedsInit(false);
-            this.form.Redraw();
-        }
-
-        private void OnInitNewClick(object sender, EventArgs e)
-        {
-            this.gol.Init(this.golSizeX, GameOfLife.InitType.Random, this.golSizeY, (float)this.form.nProbability.Value);
-            SetNeedsInit(false);
-            this.form.Redraw();
-        }
-
-        #endregion // Init Methods
-
         #endregion // Event Methods 
 
         #region SetNeedsInit
@@ -491,7 +475,7 @@ namespace GameOfLife
         /// <param name="value"></param>
         private void SetNeedsInit(bool value)
         {
-            this.needsInit = value;         
+            this.needsInit = value;
 
             // disable/enable start and next button
             this.form.btRunGOL.Enabled = !this.needsInit;

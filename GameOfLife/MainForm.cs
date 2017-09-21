@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static GameOfLife.GameOfLife;
 
 namespace GameOfLife
 {
@@ -26,6 +27,10 @@ namespace GameOfLife
             // member init
             InitializeComponent();
             this.controller = new Controller(this);
+
+            // init combobox
+            this.cbInitTypes.DataSource = Enum.GetValues(typeof(InitType));
+            this.cbInitTypes.SelectedIndex = 0;
         }
         #endregion // Constructor
 
@@ -35,7 +40,7 @@ namespace GameOfLife
         /// </summary>
         internal void Redraw()
         {
-            if (this.controller == null)
+            if (this.controller == null || this.model == null)
             {
                 return;
             }
@@ -166,7 +171,7 @@ namespace GameOfLife
                 }
             }
             return b;
-        } 
-        #endregion // GetBrush
+        }
+        #endregion // GetBrush      
     }
 }
