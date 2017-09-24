@@ -128,7 +128,7 @@
             this.groupBox4.Location = new System.Drawing.Point(12, 140);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(282, 84);
-            this.groupBox4.TabIndex = 12;
+            this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Initialization";
             // 
@@ -140,7 +140,7 @@
             this.cbInitTypes.Location = new System.Drawing.Point(9, 23);
             this.cbInitTypes.Name = "cbInitTypes";
             this.cbInitTypes.Size = new System.Drawing.Size(181, 21);
-            this.cbInitTypes.TabIndex = 12;
+            this.cbInitTypes.TabIndex = 6;
             // 
             // nProbability
             // 
@@ -158,7 +158,7 @@
             0});
             this.nProbability.Name = "nProbability";
             this.nProbability.Size = new System.Drawing.Size(59, 20);
-            this.nProbability.TabIndex = 10;
+            this.nProbability.TabIndex = 8;
             this.nProbability.Value = new decimal(new int[] {
             3,
             0,
@@ -179,7 +179,7 @@
             this.btRandomInit.Location = new System.Drawing.Point(201, 21);
             this.btRandomInit.Name = "btRandomInit";
             this.btRandomInit.Size = new System.Drawing.Size(75, 23);
-            this.btRandomInit.TabIndex = 5;
+            this.btRandomInit.TabIndex = 7;
             this.btRandomInit.Text = "Init";
             this.btRandomInit.UseVisualStyleBackColor = true;
             // 
@@ -199,7 +199,7 @@
             this.groupBox3.Location = new System.Drawing.Point(12, 230);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(284, 142);
-            this.groupBox3.TabIndex = 7;
+            this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Visuals";
             // 
@@ -209,7 +209,7 @@
             this.cbShowProfile.Location = new System.Drawing.Point(6, 119);
             this.cbShowProfile.Name = "cbShowProfile";
             this.cbShowProfile.Size = new System.Drawing.Size(84, 17);
-            this.cbShowProfile.TabIndex = 17;
+            this.cbShowProfile.TabIndex = 15;
             this.cbShowProfile.Text = "Show profile";
             this.cbShowProfile.UseVisualStyleBackColor = true;
             // 
@@ -220,7 +220,7 @@
             this.cbRandomStaticColors.Location = new System.Drawing.Point(155, 72);
             this.cbRandomStaticColors.Name = "cbRandomStaticColors";
             this.cbRandomStaticColors.Size = new System.Drawing.Size(79, 17);
-            this.cbRandomStaticColors.TabIndex = 16;
+            this.cbRandomStaticColors.TabIndex = 13;
             this.cbRandomStaticColors.Text = "fixed colors";
             this.cbRandomStaticColors.UseVisualStyleBackColor = true;
             // 
@@ -236,7 +236,7 @@
             this.btBGColor.Location = new System.Drawing.Point(155, 18);
             this.btBGColor.Name = "btBGColor";
             this.btBGColor.Size = new System.Drawing.Size(70, 23);
-            this.btBGColor.TabIndex = 15;
+            this.btBGColor.TabIndex = 10;
             this.btBGColor.Text = "BG color";
             this.btBGColor.UseVisualStyleBackColor = true;
             // 
@@ -246,7 +246,7 @@
             this.cbFlickerBG.Location = new System.Drawing.Point(6, 96);
             this.cbFlickerBG.Name = "cbFlickerBG";
             this.cbFlickerBG.Size = new System.Drawing.Size(117, 17);
-            this.cbFlickerBG.TabIndex = 13;
+            this.cbFlickerBG.TabIndex = 14;
             this.cbFlickerBG.Text = "Flicker background";
             this.cbFlickerBG.UseVisualStyleBackColor = true;
             // 
@@ -272,7 +272,7 @@
             this.btChooseColor.Location = new System.Drawing.Point(6, 19);
             this.btChooseColor.Name = "btChooseColor";
             this.btChooseColor.Size = new System.Drawing.Size(77, 23);
-            this.btChooseColor.TabIndex = 10;
+            this.btChooseColor.TabIndex = 9;
             this.btChooseColor.Text = "Field color";
             this.btChooseColor.UseVisualStyleBackColor = true;
             // 
@@ -282,7 +282,7 @@
             this.cbDrawFancy.Location = new System.Drawing.Point(6, 48);
             this.cbDrawFancy.Name = "cbDrawFancy";
             this.cbDrawFancy.Size = new System.Drawing.Size(126, 17);
-            this.cbDrawFancy.TabIndex = 9;
+            this.cbDrawFancy.TabIndex = 11;
             this.cbDrawFancy.Text = "Use gradient coloring";
             this.cbDrawFancy.UseVisualStyleBackColor = true;
             // 
@@ -301,7 +301,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(282, 122);
-            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Properties";
             // 
@@ -320,7 +320,7 @@
             0});
             this.nSizeX.Name = "nSizeX";
             this.nSizeX.Size = new System.Drawing.Size(57, 20);
-            this.nSizeX.TabIndex = 12;
+            this.nSizeX.TabIndex = 1;
             this.nSizeX.Value = new decimal(new int[] {
             10,
             0,
@@ -342,7 +342,7 @@
             0});
             this.nGenerations.Name = "nGenerations";
             this.nGenerations.Size = new System.Drawing.Size(57, 20);
-            this.nGenerations.TabIndex = 11;
+            this.nGenerations.TabIndex = 4;
             this.nGenerations.Value = new decimal(new int[] {
             1,
             0,
@@ -379,7 +379,7 @@
             131072});
             this.nSpeed.Name = "nSpeed";
             this.nSpeed.Size = new System.Drawing.Size(57, 20);
-            this.nSpeed.TabIndex = 9;
+            this.nSpeed.TabIndex = 3;
             this.nSpeed.Value = new decimal(new int[] {
             5,
             0,
@@ -401,7 +401,7 @@
             0});
             this.nSizeY.Name = "nSizeY";
             this.nSizeY.Size = new System.Drawing.Size(57, 20);
-            this.nSizeY.TabIndex = 8;
+            this.nSizeY.TabIndex = 2;
             this.nSizeY.Value = new decimal(new int[] {
             10,
             0,
@@ -416,7 +416,7 @@
             this.cbInfinityEnvir.Location = new System.Drawing.Point(9, 99);
             this.cbInfinityEnvir.Name = "cbInfinityEnvir";
             this.cbInfinityEnvir.Size = new System.Drawing.Size(118, 17);
-            this.cbInfinityEnvir.TabIndex = 14;
+            this.cbInfinityEnvir.TabIndex = 5;
             this.cbInfinityEnvir.Text = "Infinite environment";
             this.cbInfinityEnvir.UseVisualStyleBackColor = true;
             // 
@@ -443,7 +443,7 @@
             this.btRunGOL.Location = new System.Drawing.Point(219, 378);
             this.btRunGOL.Name = "btRunGOL";
             this.btRunGOL.Size = new System.Drawing.Size(75, 23);
-            this.btRunGOL.TabIndex = 8;
+            this.btRunGOL.TabIndex = 17;
             this.btRunGOL.Text = "Run";
             this.btRunGOL.UseVisualStyleBackColor = true;
             // 
@@ -452,7 +452,7 @@
             this.btNext.Location = new System.Drawing.Point(152, 378);
             this.btNext.Name = "btNext";
             this.btNext.Size = new System.Drawing.Size(61, 23);
-            this.btNext.TabIndex = 0;
+            this.btNext.TabIndex = 16;
             this.btNext.Text = "Next";
             this.btNext.UseVisualStyleBackColor = true;
             // 
