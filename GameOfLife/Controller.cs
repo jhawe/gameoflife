@@ -32,6 +32,7 @@ namespace GameOfLife
         private ColorDialog colorDialog;
         private ColorDialog bgColorDialog;
         private Color[,] fieldColors;
+        private int[] lastMousePosition;
         // for random coloring mostly
         internal static Random RNG = new Random();
         #endregion // Class Member
@@ -46,7 +47,7 @@ namespace GameOfLife
             // member init
             this.form = form;
             this.fieldColors = null;
-
+            this.lastMousePosition = new int[] { -1, -1 };
             // init color dialog
             this.colorDialog = new ColorDialog();
             this.colorDialog.Color = Color.DarkGreen;
@@ -84,6 +85,7 @@ namespace GameOfLife
             this.form.cbRandomStaticColors.CheckedChanged += OnRandomStaticColorsCheckanged;
             this.form.cbShowProfile.CheckedChanged += OnShowProfileCheckedChanged;
             this.form.cbInitTypes.SelectedValueChanged += OnInitTypeChanged;
+            this.form.display.MouseMove += OnDisplayMouseMove;
             this.form.Redraw();
         }
         #endregion // Constructor
@@ -225,7 +227,7 @@ namespace GameOfLife
             {
                 return this.run;
             }
-        } 
+        }
         #endregion // Running
 
         #endregion // Properties
@@ -316,6 +318,7 @@ namespace GameOfLife
             this.form.Redraw();
         }
 
+        #region OnUseRandomColorChange
         private void OnUseRandomColorChanged(object sender, EventArgs e)
         {
             bool rc = this.form.cbRandomColoring.Checked;
@@ -327,6 +330,39 @@ namespace GameOfLife
 
             this.form.Redraw();
         }
+        #endregion // OnUseRandomColorChange
+
+        #region OnDisplayMouseMove
+        /// <summary>
+        /// Handles mouse move event on display. checks if left mouse button
+        /// is pressed, then toggles the field (once...) currently under
+        /// the mouse pointer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnDisplayMouseMove(object sender, MouseEventArgs e)
+        {
+            int x = e.X;
+            int y = e.Y;
+            GameOfLife m = this.gol;
+            if (m != null & m.Envir != null)
+            {
+                Statics.GetFieldFromDisplayPos(x, y, m, this.form.display, out x, out y);
+                if (x >= m.SizeX || y >= m.SizeY) return;
+
+                bool nc = (x != this.lastMousePosition[0]) || (y != this.lastMousePosition[1]);
+                // a secret
+                this.lastMousePosition[0] = x;
+                this.lastMousePosition[1] = y;
+
+                if (e.Button == MouseButtons.Left & nc)
+                {
+                    this.gol.ToggleField(x, y);
+                    this.form.Redraw();
+                }
+            }
+        }
+        #endregion // OnDisplayMouseMove
 
         #region OnRunGOLClick
         /// <summary>
