@@ -37,6 +37,7 @@ namespace GameOfLife
         private const int ENVIR_SIZE = 6;
         private int generation = 1;
         private bool infinite = true;
+        private ParallelOptions po = null;
         #endregion // Class Member
 
         #region Constructor
@@ -45,8 +46,10 @@ namespace GameOfLife
         /// </summary>
         public GameOfLife()
         {
-
-        }        
+            // set our parallelization options
+            this.po = new ParallelOptions();
+            this.po.MaxDegreeOfParallelism = Environment.ProcessorCount / 2;
+        }
         #endregion // Constructor
 
         #region Properties
@@ -59,7 +62,7 @@ namespace GameOfLife
         {
             get
             {
-                if(this.profile == null)
+                if (this.profile == null)
                 {
                     this.profile = new int[this.sizeX, this.sizeY];
                 }
@@ -171,7 +174,7 @@ namespace GameOfLife
                     }
                 }
             }
-        } 
+        }
         #endregion // UpdateProfile
 
         #region ToggleField
@@ -203,10 +206,10 @@ namespace GameOfLife
         /// <param name="it"></param>
         /// <param name="sizeY"></param>
         /// <param name="prob"></param>
-        internal void Init(int sizeX, InitType it, int sizeY=-1, float prob = 0.3f)
+        internal void Init(int sizeX, InitType it, int sizeY = -1, float prob = 0.3f)
         {
             // check whether we want a square environment
-            if(sizeY == -1)
+            if (sizeY == -1)
             {
                 sizeY = sizeX;
             }
@@ -237,7 +240,7 @@ namespace GameOfLife
 
             this.envir = (bool[,])init.Clone();
             this.init = init;
-            UpdateProfile(this.init);            
+            UpdateProfile(this.init);
         }
         #endregion // Init
 
@@ -254,7 +257,7 @@ namespace GameOfLife
             int half = Math.Min(this.sizeX, this.sizeY) / 2;
             init[half, half] = true;
             init[half - 1, half] = true;
-            init[half + 1, half] = true;           
+            init[half + 1, half] = true;
         }
         #endregion // BlinkerInit
 
@@ -264,7 +267,7 @@ namespace GameOfLife
         /// </summary>
         /// <param name="size">The size of the environment</param>
         private void RandomInit(bool[,] init, float prob = 0.3f)
-        {          
+        {
             var r = new Random();
             for (int i = 0; i < this.sizeX; i++)
             {
@@ -288,7 +291,7 @@ namespace GameOfLife
         /// </summary>
         /// <param name="size"></param>
         private void GleiterInit(bool[,] init)
-        {          
+        {
             // we set three living cells next to each other
             // in one line
             int half = Math.Min(this.sizeX, this.sizeY) / 2;
@@ -362,44 +365,48 @@ namespace GameOfLife
         /// <param name="copy"></param>        
         private void ApplyRules(bool[,] envir, out bool[,] copy)
         {
-            copy = (bool[,])envir.Clone();
+            bool[,] o = (bool[,])envir.Clone();
 
+            int sx = this.sizeX;
+            int sy = this.sizeY;
+            ParallelOptions po = this.po;
             // iterate over all cells and apply the rules
-            for (int i = 0; i < this.sizeX; i++)
+            Parallel.For(0, sx * sy, po, idx =>
             {
-                for (int j = 0; j < this.sizeY; j++)
+                int i = (int)Math.Floor(idx * 1.0f / sy);
+                int j = (int)Math.Floor(idx * 1.0f % sy);
+
+                int[] neighbourhood = GetNeighbourhood(envir, i, j);
+                int sum = 0;
+                // calculate sum
+                foreach (int s in neighbourhood)
                 {
-                    int[] neighbourhood = GetNeighbourhood(envir, i, j);
-                    int sum = 0;
-                    // calculate sum
-                    foreach (int s in neighbourhood)
-                    {
-                        sum += s;
-                    }
+                    sum += s;
+                }
 
-                    if (envir[i, j])
-                    {
-                        // living cell
+                if (envir[i, j])
+                {
+                    // living cell
 
-                        // rule 1) and 3) in the guide, let's the cell die
-                        // rule 2) is implicit
-                        if (sum < 2 || sum > 3)
-                        {
-                            copy[i, j] = false;
-                        }
-                    }
-                    else
+                    // rule 1) and 3) in the guide, let's the cell die
+                    // rule 2) is implicit
+                    if (sum < 2 || sum > 3)
                     {
-                        // dead cell
-
-                        // rule 4)
-                        if (sum == 3)
-                        {
-                            copy[i, j] = true;
-                        }
+                        o[i, j] = false;
                     }
                 }
-            }
+                else
+                {
+                    // dead cell
+
+                    // rule 4)
+                    if (sum == 3)
+                    {
+                        o[i, j] = true;
+                    }
+                }
+            });
+            copy = o;
         }
         #endregion // ApplyRules
 
@@ -473,6 +480,11 @@ namespace GameOfLife
 
         #region Override Methods
 
+        #region ToString
+        /// <summary>
+        /// Creates string representation of the GOL instance
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -486,6 +498,8 @@ namespace GameOfLife
             }
             return sb.ToString();
         }
+        #endregion // ToString
+
         #endregion // Override Methods
 
         #endregion // Methods
