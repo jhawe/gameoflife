@@ -335,8 +335,6 @@ namespace GameOfLife
         /// </param>
         public void Update(int generations = 1)
         {
-            // local var
-            bool[,] envir = this.envir;
             bool[,] copy = new bool[this.sizeX, this.sizeY];
 
             // perform some updates...
@@ -345,11 +343,11 @@ namespace GameOfLife
                 this.generation++;
 
                 // apply our update                 
-                ApplyRules(envir, out copy);
-                envir = (bool[,])copy.Clone();
+                ApplyRules(out copy);
+                this.envir = (bool[,])copy.Clone();
 
                 // update the count profile
-                UpdateProfile(envir);
+                UpdateProfile(this.envir);
             }
             // set the new environment
             this.envir = copy;
@@ -363,9 +361,9 @@ namespace GameOfLife
         /// </summary>
         /// <param name="envir"></param>
         /// <param name="copy"></param>        
-        private void ApplyRules(bool[,] envir, out bool[,] copy)
+        private void ApplyRules(out bool[,] copy)
         {
-            bool[,] o = (bool[,])envir.Clone();
+            bool[,] o = (bool[,])this.envir.Clone();
 
             int sx = this.sizeX;
             int sy = this.sizeY;
@@ -376,15 +374,9 @@ namespace GameOfLife
                 int i = (int)Math.Floor(idx * 1.0f / sy);
                 int j = (int)Math.Floor(idx * 1.0f % sy);
 
-                int[] neighbourhood = GetNeighbourhood(envir, i, j);
-                int sum = 0;
-                // calculate sum
-                foreach (int s in neighbourhood)
-                {
-                    sum += s;
-                }
+                int sum = SumNeighbourHood(i, j);
 
-                if (envir[i, j])
+                if (this.envir[i, j])
                 {
                     // living cell
 
@@ -423,7 +415,7 @@ namespace GameOfLife
         /// /// <param name="y">The y coordiante of the cell for which to get 
         /// the neighbourhood</param>
         /// <returns></returns>
-        internal int[] GetNeighbourhood(bool[,] envir, int x, int y)
+        internal int[] GetNeighbourhood(int x, int y)
         {
             // results vector
             int[] result = new int[8];
@@ -459,7 +451,7 @@ namespace GameOfLife
                     }
 
                     // now get the value at the current position
-                    bool v = envir[nx, ny];
+                    bool v = this.envir[nx, ny];
 
                     if (v)
                     {
@@ -477,6 +469,27 @@ namespace GameOfLife
             return result;
         }
         #endregion // GetNeighbourhood
+
+        #region SumNeighbourHood
+        /// <summary>
+        /// Sum up the neighbourhood fields for a specific cell
+        /// </summary>
+        /// <param name="envir"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        internal int SumNeighbourHood(int x, int y)
+        {
+            int[] neighbourhood = GetNeighbourhood(x, y);
+            int sum = 0;
+            // calculate sum
+            foreach (int s in neighbourhood)
+            {
+                sum += s;
+            }
+            return (sum);
+        } 
+        #endregion // SumNeighbourHood
 
         #region Override Methods
 

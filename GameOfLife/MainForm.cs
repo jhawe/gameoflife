@@ -16,6 +16,8 @@ namespace GameOfLife
         #region Class Member
         internal GameOfLife model;
         private Controller controller;
+        // a secret
+        private int[] xlmp = new int[] { -1, -1 };
         #endregion // Class Member
 
         #region Constructor
@@ -32,9 +34,11 @@ namespace GameOfLife
             this.cbInitTypes.DataSource = Enum.GetValues(typeof(InitType));
             this.cbInitTypes.SelectedIndex = 0;
 
+            // ähem
+            this.display.MouseMove += OnDisplayMouseMove;
+
             // init tooltips
             InitTooltips();
-            
         }
         #endregion // Constructor
 
@@ -145,7 +149,7 @@ namespace GameOfLife
                     // number of neighbouring living fields
                     if (fancy)
                     {
-                        int[] n = m.GetNeighbourhood(m.Envir, i, j);
+                        int[] n = m.GetNeighbourhood(i, j);
                         int sum = 0;
                         for (int z = 0; z < n.Length; z++) { sum += n[z]; }
                         c = ControlPaint.Light(fc, 1 - (sum * 1.0f) / n.Length);
@@ -191,8 +195,56 @@ namespace GameOfLife
             tt.SetToolTip(this.cbRandomColoring, "Sets whether in each iteration the colro for a cell is assigned randomly.");
             tt.SetToolTip(this.cbRandomStaticColors, "Flags whether the once assigned random colors for each cell should be kept across updates.");
             tt.SetToolTip(this.cbShowProfile, "Toggles the profile view. Colors will represent the amount of times a specific cell was alive, from green (0) to bright red (255)");
-
-        } 
+        }
         #endregion // InitTooltips
+
+        #region OnDisplayMouseMove
+        /// <summary>
+        /// You are not supposed to read this.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnDisplayMouseMove(object sender, MouseEventArgs e)
+        {
+            int x = e.X;
+            int y = e.Y;
+            GameOfLife m = this.model;
+            if (m != null & m.Envir != null)
+            {
+                if (!this.controller.Running)
+                {
+                    Statics.GetFieldFromDisplayPos(x, y, m, this.display, out x, out y);
+                    if (x >= m.SizeX || y >= m.SizeY) return;
+
+                    bool nc = (x != this.xlmp[0]) || (y != this.xlmp[1]);
+                    // a secret
+                    this.xlmp[0] = x;
+                    this.xlmp[1] = y;
+
+                    int sum = m.SumNeighbourHood(x, y);
+                    if (m.Envir[x, y])
+                    {
+                        if (nc)
+                        {
+                            if (sum == 0)
+                            {
+                                string[] msgs = new string[] {
+                                    "\"I'm so lonely, I think I'm going to die.\"",
+                                    "\"What is the meaning of life, if there is nobody you can share it with?\"",
+                                    "\"Knock, knock.\"\n\"Who's there?\"\n\"Death.\"\n\"x_x\""};
+                                int idx = new Random().Next(0, msgs.Length);
+                                this.toolTips.SetToolTip(this.display,
+                                    msgs[idx]);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        this.toolTips.SetToolTip(this.display, "");
+                    }
+                }
+            }
+        } 
+        #endregion // OnDisplayMouseMove
     }
 }

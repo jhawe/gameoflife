@@ -215,6 +215,19 @@ namespace GameOfLife
         }
         #endregion // UseRandomColor
 
+        #region Running
+        /// <summary>
+        /// Gets a flag whether currently updates are taking place
+        /// </summary>
+        internal bool Running
+        {
+            get
+            {
+                return this.run;
+            }
+        } 
+        #endregion // Running
+
         #endregion // Properties
 
         #region Methods
@@ -453,15 +466,12 @@ namespace GameOfLife
             // get coordinates
             int x = e.Location.X;
             int y = e.Location.Y;
+
             // get the according field
-            // get size of individual boxes
-            int sizeX = 0;
-            int sizeY = 0;
-            Statics.GetBoxSize(this.gol, (Control)sender, out sizeX, out sizeY);
-            int xn = (int)Math.Floor(x * 1.0 / sizeX);
-            int yn = (int)Math.Floor(y * 1.0 / sizeY);
+            Statics.GetFieldFromDisplayPos(x, y, this.gol, (Control)sender, out x, out y);
+
             // toggle the corresponding field
-            this.gol.ToggleField(xn, yn);
+            this.gol.ToggleField(x, y);
             this.form.Redraw();
         }
         #endregion // OnDisplayMouseClick

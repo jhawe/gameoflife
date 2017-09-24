@@ -101,7 +101,6 @@
             // 
             // pbProgress
             // 
-            this.pbProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbProgress.Location = new System.Drawing.Point(219, 407);
             this.pbProgress.Name = "pbProgress";
             this.pbProgress.Size = new System.Drawing.Size(75, 12);
@@ -177,7 +176,6 @@
             // 
             // btRandomInit
             // 
-            this.btRandomInit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btRandomInit.Location = new System.Drawing.Point(201, 21);
             this.btRandomInit.Name = "btRandomInit";
             this.btRandomInit.Size = new System.Drawing.Size(75, 23);
@@ -309,7 +307,6 @@
             // 
             // nSizeX
             // 
-            this.nSizeX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nSizeX.Location = new System.Drawing.Point(152, 20);
             this.nSizeX.Maximum = new decimal(new int[] {
             300,
@@ -332,7 +329,6 @@
             // 
             // nGenerations
             // 
-            this.nGenerations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nGenerations.Location = new System.Drawing.Point(219, 74);
             this.nGenerations.Maximum = new decimal(new int[] {
             500,
@@ -364,7 +360,6 @@
             // 
             // nSpeed
             // 
-            this.nSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nSpeed.DecimalPlaces = 2;
             this.nSpeed.Increment = new decimal(new int[] {
             5,
@@ -393,7 +388,6 @@
             // 
             // nSizeY
             // 
-            this.nSizeY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nSizeY.Location = new System.Drawing.Point(219, 20);
             this.nSizeY.Maximum = new decimal(new int[] {
             300,
@@ -446,7 +440,6 @@
             // 
             // btRunGOL
             // 
-            this.btRunGOL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btRunGOL.Location = new System.Drawing.Point(219, 378);
             this.btRunGOL.Name = "btRunGOL";
             this.btRunGOL.Size = new System.Drawing.Size(75, 23);
@@ -456,7 +449,6 @@
             // 
             // btNext
             // 
-            this.btNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btNext.Location = new System.Drawing.Point(152, 378);
             this.btNext.Name = "btNext";
             this.btNext.Size = new System.Drawing.Size(61, 23);
