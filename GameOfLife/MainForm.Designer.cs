@@ -28,36 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.pbProgress = new System.Windows.Forms.ProgressBar();
             this.lGeneration = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cbInitTypes = new System.Windows.Forms.ComboBox();
             this.nProbability = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
+            this.probLabel = new System.Windows.Forms.Label();
             this.btRandomInit = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.pbProgress = new System.Windows.Forms.ProgressBar();
             this.cbShowProfile = new System.Windows.Forms.CheckBox();
             this.cbRandomStaticColors = new System.Windows.Forms.CheckBox();
             this.plBGColor = new System.Windows.Forms.Panel();
             this.btBGColor = new System.Windows.Forms.Button();
-            this.cbInfinityEnvir = new System.Windows.Forms.CheckBox();
             this.cbFlickerBG = new System.Windows.Forms.CheckBox();
             this.cbRandomColoring = new System.Windows.Forms.CheckBox();
             this.plColor = new System.Windows.Forms.Panel();
             this.btChooseColor = new System.Windows.Forms.Button();
             this.cbDrawFancy = new System.Windows.Forms.CheckBox();
-            this.btRunGOL = new System.Windows.Forms.Button();
-            this.btNext = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.nSizeX = new System.Windows.Forms.NumericUpDown();
             this.nGenerations = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.nSpeed = new System.Windows.Forms.NumericUpDown();
             this.nSizeY = new System.Windows.Forms.NumericUpDown();
+            this.cbInfinityEnvir = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btRunGOL = new System.Windows.Forms.Button();
+            this.btNext = new System.Windows.Forms.Button();
             this.display = new System.Windows.Forms.PictureBox();
-            this.cbInitTypes = new System.Windows.Forms.ComboBox();
+            this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -97,6 +99,16 @@
             this.splitContainer1.SplitterDistance = 297;
             this.splitContainer1.TabIndex = 0;
             // 
+            // pbProgress
+            // 
+            this.pbProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbProgress.Location = new System.Drawing.Point(219, 407);
+            this.pbProgress.Name = "pbProgress";
+            this.pbProgress.Size = new System.Drawing.Size(75, 12);
+            this.pbProgress.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.pbProgress.TabIndex = 15;
+            this.pbProgress.Visible = false;
+            // 
             // lGeneration
             // 
             this.lGeneration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -112,7 +124,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.cbInitTypes);
             this.groupBox4.Controls.Add(this.nProbability);
-            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.probLabel);
             this.groupBox4.Controls.Add(this.btRandomInit);
             this.groupBox4.Location = new System.Drawing.Point(12, 140);
             this.groupBox4.Name = "groupBox4";
@@ -121,9 +133,18 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Initialization";
             // 
+            // cbInitTypes
+            // 
+            this.cbInitTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbInitTypes.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.cbInitTypes.FormattingEnabled = true;
+            this.cbInitTypes.Location = new System.Drawing.Point(9, 23);
+            this.cbInitTypes.Name = "cbInitTypes";
+            this.cbInitTypes.Size = new System.Drawing.Size(181, 21);
+            this.cbInitTypes.TabIndex = 12;
+            // 
             // nProbability
             // 
-            this.nProbability.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nProbability.DecimalPlaces = 2;
             this.nProbability.Increment = new decimal(new int[] {
             1,
@@ -145,14 +166,14 @@
             0,
             65536});
             // 
-            // label2
+            // probLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 60);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 13);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Probability of living cell";
+            this.probLabel.AutoSize = true;
+            this.probLabel.Location = new System.Drawing.Point(12, 60);
+            this.probLabel.Name = "probLabel";
+            this.probLabel.Size = new System.Drawing.Size(113, 13);
+            this.probLabel.TabIndex = 11;
+            this.probLabel.Text = "Probability of living cell";
             // 
             // btRandomInit
             // 
@@ -183,16 +204,6 @@
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Visuals";
-            // 
-            // pbProgress
-            // 
-            this.pbProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbProgress.Location = new System.Drawing.Point(219, 407);
-            this.pbProgress.Name = "pbProgress";
-            this.pbProgress.Size = new System.Drawing.Size(75, 12);
-            this.pbProgress.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.pbProgress.TabIndex = 15;
-            this.pbProgress.Visible = false;
             // 
             // cbShowProfile
             // 
@@ -230,18 +241,6 @@
             this.btBGColor.TabIndex = 15;
             this.btBGColor.Text = "BG color";
             this.btBGColor.UseVisualStyleBackColor = true;
-            // 
-            // cbInfinityEnvir
-            // 
-            this.cbInfinityEnvir.AutoSize = true;
-            this.cbInfinityEnvir.Checked = true;
-            this.cbInfinityEnvir.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbInfinityEnvir.Location = new System.Drawing.Point(9, 99);
-            this.cbInfinityEnvir.Name = "cbInfinityEnvir";
-            this.cbInfinityEnvir.Size = new System.Drawing.Size(118, 17);
-            this.cbInfinityEnvir.TabIndex = 14;
-            this.cbInfinityEnvir.Text = "Infinite environment";
-            this.cbInfinityEnvir.UseVisualStyleBackColor = true;
             // 
             // cbFlickerBG
             // 
@@ -288,26 +287,6 @@
             this.cbDrawFancy.TabIndex = 9;
             this.cbDrawFancy.Text = "Use gradient coloring";
             this.cbDrawFancy.UseVisualStyleBackColor = true;
-            // 
-            // btRunGOL
-            // 
-            this.btRunGOL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btRunGOL.Location = new System.Drawing.Point(219, 378);
-            this.btRunGOL.Name = "btRunGOL";
-            this.btRunGOL.Size = new System.Drawing.Size(75, 23);
-            this.btRunGOL.TabIndex = 8;
-            this.btRunGOL.Text = "Run";
-            this.btRunGOL.UseVisualStyleBackColor = true;
-            // 
-            // btNext
-            // 
-            this.btNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btNext.Location = new System.Drawing.Point(152, 378);
-            this.btNext.Name = "btNext";
-            this.btNext.Size = new System.Drawing.Size(61, 23);
-            this.btNext.TabIndex = 0;
-            this.btNext.Text = "Next";
-            this.btNext.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -435,6 +414,18 @@
             0,
             0});
             // 
+            // cbInfinityEnvir
+            // 
+            this.cbInfinityEnvir.AutoSize = true;
+            this.cbInfinityEnvir.Checked = true;
+            this.cbInfinityEnvir.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbInfinityEnvir.Location = new System.Drawing.Point(9, 99);
+            this.cbInfinityEnvir.Name = "cbInfinityEnvir";
+            this.cbInfinityEnvir.Size = new System.Drawing.Size(118, 17);
+            this.cbInfinityEnvir.TabIndex = 14;
+            this.cbInfinityEnvir.Text = "Infinite environment";
+            this.cbInfinityEnvir.UseVisualStyleBackColor = true;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -453,6 +444,26 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Size (x / y)";
             // 
+            // btRunGOL
+            // 
+            this.btRunGOL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btRunGOL.Location = new System.Drawing.Point(219, 378);
+            this.btRunGOL.Name = "btRunGOL";
+            this.btRunGOL.Size = new System.Drawing.Size(75, 23);
+            this.btRunGOL.TabIndex = 8;
+            this.btRunGOL.Text = "Run";
+            this.btRunGOL.UseVisualStyleBackColor = true;
+            // 
+            // btNext
+            // 
+            this.btNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btNext.Location = new System.Drawing.Point(152, 378);
+            this.btNext.Name = "btNext";
+            this.btNext.Size = new System.Drawing.Size(61, 23);
+            this.btNext.TabIndex = 0;
+            this.btNext.Text = "Next";
+            this.btNext.UseVisualStyleBackColor = true;
+            // 
             // display
             // 
             this.display.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -461,16 +472,6 @@
             this.display.Size = new System.Drawing.Size(589, 541);
             this.display.TabIndex = 0;
             this.display.TabStop = false;
-            // 
-            // cbInitTypes
-            // 
-            this.cbInitTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbInitTypes.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cbInitTypes.FormattingEnabled = true;
-            this.cbInitTypes.Location = new System.Drawing.Point(9, 23);
-            this.cbInitTypes.Name = "cbInitTypes";
-            this.cbInitTypes.Size = new System.Drawing.Size(181, 21);
-            this.cbInitTypes.TabIndex = 12;
             // 
             // MainForm
             // 
@@ -516,7 +517,6 @@
         internal System.Windows.Forms.NumericUpDown nSizeY;
         private System.Windows.Forms.GroupBox groupBox4;
         internal System.Windows.Forms.NumericUpDown nProbability;
-        private System.Windows.Forms.Label label2;
         internal System.Windows.Forms.Label lGeneration;
         internal System.Windows.Forms.CheckBox cbDrawFancy;
         internal System.Windows.Forms.Button btChooseColor;
@@ -533,6 +533,8 @@
         internal System.Windows.Forms.ProgressBar pbProgress;
         internal System.Windows.Forms.NumericUpDown nSizeX;
         internal System.Windows.Forms.ComboBox cbInitTypes;
+        private System.Windows.Forms.ToolTip toolTips;
+        internal System.Windows.Forms.Label probLabel;
     }
 }
 

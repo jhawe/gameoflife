@@ -196,6 +196,13 @@ namespace GameOfLife
         #endregion // ToggleField
 
         #region Init
+        /// <summary>
+        /// Initializes a new environment for the GOL instance
+        /// </summary>
+        /// <param name="sizeX"></param>
+        /// <param name="it"></param>
+        /// <param name="sizeY"></param>
+        /// <param name="prob"></param>
         internal void Init(int sizeX, InitType it, int sizeY=-1, float prob = 0.3f)
         {
             // check whether we want a square environment

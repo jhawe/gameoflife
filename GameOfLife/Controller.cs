@@ -83,7 +83,7 @@ namespace GameOfLife
             this.form.btBGColor.Click += OnChooseBGColorClick;
             this.form.cbRandomStaticColors.CheckedChanged += OnRandomStaticColorsCheckanged;
             this.form.cbShowProfile.CheckedChanged += OnShowProfileCheckedChanged;
-
+            this.form.cbInitTypes.SelectedValueChanged += OnInitTypeChanged;
             this.form.Redraw();
         }
         #endregion // Constructor
@@ -220,6 +220,21 @@ namespace GameOfLife
         #region Methods
 
         #region Event Methods
+
+        #region OnInitTypeChanged
+        /// <summary>
+        /// Handle change of currently selected inittype
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnInitTypeChanged(object sender, EventArgs e)
+        {
+            bool v = this.form.cbInitTypes.SelectedValue.Equals(GameOfLife.InitType.Random);
+
+            this.form.nProbability.Enabled = v;
+            this.form.probLabel.Enabled = v;
+        }
+        #endregion // OnInitTypeChanged
 
         #region OnChooseColorClick
         /// <summary>
@@ -410,9 +425,9 @@ namespace GameOfLife
             this.gol.Init(this.golSizeX, it, this.golSizeY, (float)this.form.nProbability.Value);
             SetNeedsInit(false);
             this.form.Redraw();
-        } 
+        }
         #endregion // OnInit
-        
+
         #region OnInfiniteEnvironmentChanged
         /// <summary>
         /// Handles checked change event o finfinitie envir toggle

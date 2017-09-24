@@ -31,6 +31,10 @@ namespace GameOfLife
             // init combobox
             this.cbInitTypes.DataSource = Enum.GetValues(typeof(InitType));
             this.cbInitTypes.SelectedIndex = 0;
+
+            // init tooltips
+            InitTooltips();
+            
         }
         #endregion // Constructor
 
@@ -173,5 +177,22 @@ namespace GameOfLife
             return b;
         }
         #endregion // GetBrush      
+
+        #region InitTooltips
+        /// <summary>
+        /// initializes tooltip texts for some of the available options
+        /// </summary>
+        private void InitTooltips()
+        {
+            ToolTip tt = this.toolTips;
+            tt.SetToolTip(this.cbDrawFancy, "Color fields according to number of neighbouring living fields.");
+            tt.SetToolTip(this.cbFlickerBG, "Let the background flicker randomly with a certain probability.");
+            tt.SetToolTip(this.cbInfinityEnvir, "Whether to use an infinite environment. If not set, updates for edge fields will not be calculated across borders.");
+            tt.SetToolTip(this.cbRandomColoring, "Sets whether in each iteration the colro for a cell is assigned randomly.");
+            tt.SetToolTip(this.cbRandomStaticColors, "Flags whether the once assigned random colors for each cell should be kept across updates.");
+            tt.SetToolTip(this.cbShowProfile, "Toggles the profile view. Colors will represent the amount of times a specific cell was alive, from green (0) to bright red (255)");
+
+        } 
+        #endregion // InitTooltips
     }
 }
