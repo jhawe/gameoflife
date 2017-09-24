@@ -10,9 +10,9 @@ The GOL is an example for finite cellular automatons: In an environment of a pre
 For a given start distribution of living cells, the next generation of cells can be simulated where each cell either dies or lives 
 based on the number of neighbouring living/dead cells and a set of predefined rules. During successive updates, several situations can occur:
 
-1. All cells die
-2. Cell develop certain static patterns together with neighbouring cells
-3. Random (and possibly infinite) development of cells
+1. *All cells die*
+2. *Cell develop certain static patterns together with neighbouring cells*
+3. *Random (and possibly infinite) development of cells*
 
 ## Features
 * Dynamic size of environment
@@ -22,7 +22,7 @@ updates to perform per second can be adjusted
 heatmap, thereby showing a profile of the so far calculated updates.
 * Environment can be reduced to a non-infinite environment
 * Different possibilities of start cell assignments, including random assignment of cells.
-* **GOD**-mode. Anytime during the GOL life cycle, the user can simply click or click-drag with the left mouse button to toggle the cells below the moise pointer*.
+* **GOD**-mode. Anytime during the GOL life cycle, the user can simply click or click-drag with the left mouse button to toggle the cells below the mouse pointer*.
 
 ## Controls
 
@@ -45,4 +45,4 @@ heatmap, thereby showing a profile of the so far calculated updates.
 |*start*|Perform automatic updates in the specified interval until the field is empty (or infinitely...)|
 
 
-*No cells are harmed during this process. 
+*No cells are harmed during this process ;-)
