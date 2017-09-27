@@ -25,6 +25,8 @@ heatmap, thereby showing a profile of the so far calculated updates.
 * **GOD**-mode. Anytime during the GOL life cycle, the user can simply click or click-drag with the left mouse button to toggle the cells below the mouse pointer*.
 
 ## Controls
+Before each run, the current environment for the specified options needs to be initialized using the "Init" button in the GUI.
+The following options in the GUI can be used to adjust the behaviour of the GameOfLife:
 
 |control name|meaning|
 |------|----|
