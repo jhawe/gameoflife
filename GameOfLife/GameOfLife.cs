@@ -19,7 +19,12 @@ namespace GameOfLife
             Random,
             Blinker,
             Gleiter,
-            Pentamino
+            Pentamino,
+            Diagonal,
+            FullLine,
+            HalfLine,
+            Empty,
+            Full
         }
         #endregion // InitType 
 
@@ -225,8 +230,25 @@ namespace GameOfLife
                 case InitType.Random:
                     RandomInit(init, prob);
                     break;
+                case InitType.Empty:
+                    // reuse random init method with zero probability
+                    RandomInit(init, 0);
+                    break;
+                case InitType.Full:
+                    // reuse random init method with 100% probability
+                    RandomInit(init, 1);
+                    break;
+                case InitType.FullLine:
+                    LineInit(init, true);
+                    break;
+                case InitType.HalfLine:
+                    LineInit(init, false);
+                    break;
                 case InitType.Pentamino:
                     PentominoInit(init);
+                    break;
+                case InitType.Diagonal:
+                    DiagonalInit(init);
                     break;
                 case InitType.Gleiter:
                     GleiterInit(init);
@@ -243,6 +265,47 @@ namespace GameOfLife
             UpdateProfile(this.init);
         }
         #endregion // Init
+
+        #region LineInit
+        /// <summary>
+        /// Initializes a straight vertical line across the field,
+        /// at half horizontal dimension
+        /// </summary>
+        /// <param name="init"></param>
+        /// <param name="full">Whether to init a full or a halfline</param>
+        private void LineInit(bool[,] init, bool full)
+        {
+            int halfY = this.sizeY / 2;
+            int forthX = this.sizeX / 4;
+            int threeForthX = forthX * 3;
+            for (int i = 0; i < this.sizeX; i++)
+            {
+                if (!full && i >= forthX && i <= threeForthX)
+                {
+                    init[halfY, i] = true;
+                }
+                else if (full)
+                {
+                    init[halfY, i] = true;
+                }
+            }
+        }
+        #endregion // LineInit
+
+        #region DiagonalInit
+        /// <summary>
+        /// Initializes a diagonal line. Field needs to be square for this
+        /// to work properly
+        /// </summary>
+        /// <param name="init"></param>
+        private void DiagonalInit(bool[,] init)
+        {
+            for (int i = 0; i < Math.Min(this.sizeX, this.sizeY); i++)
+            {
+                init[i, i] = true;
+            }
+        }
+        #endregion // DiagonalInit
 
         #region BlinkerInit
         /// <summary>
@@ -488,7 +551,7 @@ namespace GameOfLife
                 sum += s;
             }
             return (sum);
-        } 
+        }
         #endregion // SumNeighbourHood
 
         #region Override Methods

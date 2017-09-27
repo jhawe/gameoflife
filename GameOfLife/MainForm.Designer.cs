@@ -60,6 +60,7 @@
             this.btNext = new System.Windows.Forms.Button();
             this.display = new System.Windows.Forms.PictureBox();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
+            this.lDiagWarning = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -83,6 +84,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.lDiagWarning);
             this.splitContainer1.Panel1.Controls.Add(this.pbProgress);
             this.splitContainer1.Panel1.Controls.Add(this.lGeneration);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox4);
@@ -101,7 +103,7 @@
             // 
             // pbProgress
             // 
-            this.pbProgress.Location = new System.Drawing.Point(219, 407);
+            this.pbProgress.Location = new System.Drawing.Point(219, 423);
             this.pbProgress.Name = "pbProgress";
             this.pbProgress.Size = new System.Drawing.Size(75, 12);
             this.pbProgress.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
@@ -440,7 +442,7 @@
             // 
             // btRunGOL
             // 
-            this.btRunGOL.Location = new System.Drawing.Point(219, 378);
+            this.btRunGOL.Location = new System.Drawing.Point(219, 394);
             this.btRunGOL.Name = "btRunGOL";
             this.btRunGOL.Size = new System.Drawing.Size(75, 23);
             this.btRunGOL.TabIndex = 17;
@@ -449,7 +451,7 @@
             // 
             // btNext
             // 
-            this.btNext.Location = new System.Drawing.Point(152, 378);
+            this.btNext.Location = new System.Drawing.Point(152, 394);
             this.btNext.Name = "btNext";
             this.btNext.Size = new System.Drawing.Size(61, 23);
             this.btNext.TabIndex = 16;
@@ -464,6 +466,16 @@
             this.display.Size = new System.Drawing.Size(589, 541);
             this.display.TabIndex = 0;
             this.display.TabStop = false;
+            // 
+            // lDiagWarning
+            // 
+            this.lDiagWarning.AutoSize = true;
+            this.lDiagWarning.Location = new System.Drawing.Point(9, 375);
+            this.lDiagWarning.Name = "lDiagWarning";
+            this.lDiagWarning.Size = new System.Drawing.Size(272, 13);
+            this.lDiagWarning.TabIndex = 12;
+            this.lDiagWarning.Text = "Note: Diagonal type works best for square environment. ";
+            this.lDiagWarning.Visible = false;
             // 
             // MainForm
             // 
@@ -527,6 +539,7 @@
         internal System.Windows.Forms.ComboBox cbInitTypes;
         private System.Windows.Forms.ToolTip toolTips;
         internal System.Windows.Forms.Label probLabel;
+        internal System.Windows.Forms.Label lDiagWarning;
     }
 }
 

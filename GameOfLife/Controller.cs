@@ -244,10 +244,16 @@ namespace GameOfLife
         /// <param name="e"></param>
         private void OnInitTypeChanged(object sender, EventArgs e)
         {
-            bool v = this.form.cbInitTypes.SelectedValue.Equals(GameOfLife.InitType.Random);
+            InitType it = (InitType)this.form.cbInitTypes.SelectedValue;
 
-            this.form.nProbability.Enabled = v;
-            this.form.probLabel.Enabled = v;
+            // set options for random init
+            bool r = it.Equals(GameOfLife.InitType.Random);
+            this.form.nProbability.Enabled = r;
+            this.form.probLabel.Enabled = r;
+
+            // toggle message for diagonal init
+            bool d = it.Equals(GameOfLife.InitType.Diagonal);
+            this.form.lDiagWarning.Visible = d;
         }
         #endregion // OnInitTypeChanged
 
@@ -266,22 +272,7 @@ namespace GameOfLife
                 this.form.Redraw();
             }
         }
-        #endregion // OnChooseColorClick
-
-        private void OnFormResizeEnd(object sender, EventArgs e)
-        {
-            this.form.Redraw();
-        }
-
-        private void OnSpeedChanged(object sender, EventArgs e)
-        {
-            this.speed = (float)this.form.nSpeed.Value;
-        }
-
-        private void OnUseFancyCheckChanged(object sender, EventArgs e)
-        {
-            this.form.Redraw();
-        }
+        #endregion // OnChooseColorClick     
 
         #region OnChooseBGColorClick
         /// <summary>
@@ -300,11 +291,25 @@ namespace GameOfLife
         }
         #endregion // OnChooseBGColorClick
 
-        private void OnRandomStaticColorsCheckanged(object sender, EventArgs e)
+        private void OnFormResizeEnd(object sender, EventArgs e)
         {
             this.form.Redraw();
         }
 
+        private void OnSpeedChanged(object sender, EventArgs e)
+        {
+            this.speed = (float)this.form.nSpeed.Value;
+        }
+
+        private void OnUseFancyCheckChanged(object sender, EventArgs e)
+        {
+            this.form.Redraw();
+        }
+
+        private void OnRandomStaticColorsCheckanged(object sender, EventArgs e)
+        {
+            this.form.Redraw();
+        }
 
         private void OnShowProfileCheckedChanged(object sender, EventArgs e)
         {
@@ -319,6 +324,11 @@ namespace GameOfLife
         }
 
         #region OnUseRandomColorChange
+        /// <summary>
+        /// Handles case if checkbox for randomcolor-use gets changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnUseRandomColorChanged(object sender, EventArgs e)
         {
             bool rc = this.form.cbRandomColoring.Checked;
@@ -456,7 +466,6 @@ namespace GameOfLife
             }
         }
         #endregion // OnSizeChanged
-
 
         #region OnInit
         /// <summary>
