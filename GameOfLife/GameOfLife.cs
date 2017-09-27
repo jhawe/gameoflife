@@ -53,7 +53,7 @@ namespace GameOfLife
         {
             // set our parallelization options
             this.po = new ParallelOptions();
-            this.po.MaxDegreeOfParallelism = Environment.ProcessorCount / 2;
+            this.po.MaxDegreeOfParallelism = Math.Max(1, Environment.ProcessorCount / 2);
         }
         #endregion // Constructor
 
